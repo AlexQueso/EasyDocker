@@ -9,6 +9,6 @@ Aplicación en la que cada usuario puede subir productos que le interesen, a tra
 El servicio interno se encargará de mandar correos a los usuarios registrados cuando uno de los productos que ha subido o por los que se ha interesado ha bajado de precio.
 
 ### Integrantes del equipo
-Alejandro Quesada Mendo - a.quesada.2016@alumnos.urjc.es - AlexQueso  
-David Correas Oliver - d.correas.2016@alumnos.urjc.es - 
-Jose Miguel Zamora Batista - jm.zamora.2016@alumnos.urjc.es - 
+Alejandro Quesada Mendo - a.quesada.2016@alumnos.urjc.es - AlexQueso   
+David Correas Oliver - d.correas.2016@alumnos.urjc.es - DavidCorreas  
+Jose Miguel Zamora Batista - jm.zamora.2016@alumnos.urjc.es - JoseZamora97  
