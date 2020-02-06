@@ -2,32 +2,33 @@ package com.include.easydocker.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserOverviewController {
 
     @RequestMapping("/User/{userName}")
-    public String userPage(Model model){
+    public String userPage(@PathVariable(value = "id")long userId, Model model){
 
         return "user_overview";
     }
 
-    @RequestMapping("/create_proyect")
-    public String createProyect(Model model){
+    @RequestMapping("/create_project")
+    public String createProject(Model model){
 
-        return "";
+        return "user_overview";
     }
 
-    @RequestMapping("/access_proyect")
-    public String accessProyect(Model model){
+    @RequestMapping("/access_project/{id}")
+    public String accessProject(@PathVariable(value = "id")long proyectId, Model model){
 
-        return "";
+        return "user_overview";
     }
 
-    @RequestMapping("/delete_proyect")
-    public String deleteProyect(Model model){
+    @RequestMapping("/delete_project/{}")
+    public String deleteProject(@PathVariable(value = "id")long proyectId, Model model){
 
-        return "";
+        return "user_overview";
     }
 }

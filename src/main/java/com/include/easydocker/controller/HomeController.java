@@ -16,12 +16,12 @@ public class HomeController {
     @RequestMapping("/sign_in")
     public String signIn(Model model){
 
-        return "";
+        return "home";
     }
 
-    @RequestMapping("sign_up")
+    @RequestMapping("/sign_up")
     public String signUp(Model model){
 
-        return "";
+        return "home";
     }
 }
