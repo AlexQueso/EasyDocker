@@ -3,8 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+
+    <link rel="stylesheet" href="/styles.css">
+
 </head>
 <body>
+
+<header>
+    <div class="image-container">
+        <p>EasyDocker</p>
+    </div>
+</header>
+
+<div class="content">
+    <div class="container-login">
+
+        <div class="container-login-item" id="container-login-left">
+
+        </div>
+
+        {{#selection}}
+        <div class="container-login-item" id="selection">
+
+        </div>
+        {{/selection}}
+
+        <div class="container-login-item" id="log-in">
+
+            <form class="form" action="">
+
+                <div class="form-entry">
+                    <p>User</p>
+                    <label >
+                        <input type="text" name="user">
+                    </label>
+                </div>
+
+                <div class="form-entry">
+                    <p>Password</p>
+                    <label class="form-entry">
+                        <input type="text" name="password">
+                    </label>
+                </div>
+
+                <button class="btn-submit" type="submit">Sign In</button>
+            </form>
+
+        </div>
+
+        {{#signin}}
+        <div class="container-login-item" id="sign-in">
+            <form class="form" action="">
+
+                <p>User</p>
+                <div class="form-entry">
+                    <label >
+                        <input type="text" name="user">
+                    </label>
+                </div>
+
+                <div class="form-entry">
+                    <p>Password</p>
+                    <label class="form-entry">
+                        <input type="text" name="password">
+                    </label>
+                </div>
+
+                <button class="btn-submit" type="submit">Sign In</button>
+            </form>
+
+        </div>
+        {{/signin}}
+
+    </div>
+</div>
+
+<footer>
+    Include 2020
+</footer>
 
 </body>
 </html>

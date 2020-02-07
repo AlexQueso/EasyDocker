@@ -9,19 +9,16 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model){
-
         return "home";
     }
 
     @RequestMapping("/sign_in")
     public String signIn(Model model){
-
         return "home";
     }
 
     @RequestMapping("/sign_up")
     public String signUp(Model model){
-
         return "home";
     }
 }

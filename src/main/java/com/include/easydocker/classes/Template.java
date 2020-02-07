@@ -2,6 +2,7 @@ package com.include.easydocker.classes;
 
 import javax.persistence.*;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,9 +17,9 @@ public class Template {
     @ManyToOne
     private Project project;
     @OneToMany
-    private LinkedList<DockerDescription> dockerDescriptions;
+    private List<DockerDescription> dockerDescriptions;
     @OneToMany
-    private LinkedList<Docker> dockers;
+    private List<Docker> dockers;
 
     /*CONSTRUCTORS*/
     public Template(){}
@@ -56,19 +57,19 @@ public class Template {
         this.project = project;
     }
 
-    public LinkedList<DockerDescription> getDockerDescriptions() {
+    public List<DockerDescription> getDockerDescriptions() {
         return dockerDescriptions;
     }
 
-    public void setDockerDescriptions(LinkedList<DockerDescription> dockerDescriptions) {
+    public void setDockerDescriptions(List<DockerDescription> dockerDescriptions) {
         this.dockerDescriptions = dockerDescriptions;
     }
 
-    public LinkedList<Docker> getDockers() {
+    public List<Docker> getDockers() {
         return dockers;
     }
 
-    public void setDockers(LinkedList<Docker> dockers) {
+    public void setDockers(List<Docker> dockers) {
         this.dockers = dockers;
     }
 
