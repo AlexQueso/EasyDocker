@@ -11,7 +11,7 @@ public interface DockerDescriptionRepository extends JpaRepository<DockerDescrip
 
     DockerDescription findById(long id);
 
-    DockerDescription findByDocker(Docker docker);
+    // DockerDescription findByDocker(Docker docker); Todo: Fix
 
     List<DockerDescription> findAll();
 

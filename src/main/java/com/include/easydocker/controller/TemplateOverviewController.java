@@ -21,13 +21,13 @@ public class TemplateOverviewController {
     }
 
     @RequestMapping("/edit_docker/{id}")
-    public String editDocker(@PathVariable(value = "id")long dockertId, Model model){
+    public String editDocker(@PathVariable(value = "id")long dockerId, Model model){
 
         return "template_overview";
     }
 
     @RequestMapping("/delete_docker/{id}")
-    public String deleteDocker(@PathVariable(value = "id")long dockertId, Model model){
+    public String deleteDocker(@PathVariable(value = "id")long dockerId, Model model){
 
         return "template_overview";
     }
