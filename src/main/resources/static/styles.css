@@ -123,14 +123,76 @@ a {
 
 /*=============================================== APP - Styles ======================================================*/
 
-.container-app {
+.container-item {
     width: 90%;
     height: 80%;
     background: white;
+
     border-radius: 24px;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.container-
+.container-item-header {
+    height: 10%;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-item-header h2{
+    margin: 0 50px;
+    font-family: var(--fontTitles);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.container-item-header a {
+    margin: 0 18px;
+}
+
+.container-content {
+    height: 90%;
+    background: white;
+    display: flex;
+}
+
+.items-list {
+    height: 100%;
+    width: 100%;
+    list-style-type: none;
+    overflow: auto
+}
+
+
+.container-content-items {
+    height: 50px;
+    width: 95%;
+    background: white;
+    font-family: var(--fontTitles);
+    margin: 10px auto;
+    size: 16px;
+
+    padding-left: 20px;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    transition: 0.5s ease;
+
+}
+
+.container-content-items:hover {
+    background: var(--colorPrimaryDark);
+    border-bottom: 2px solid var(--colorPrimary);
+    color: white;
+}
 
 
 /*===================================================================================================================*/
@@ -160,7 +222,6 @@ a {
 }
 input:focus,
 select:focus,
-textarea:focus,
 button:focus {
     outline: none;
 }
@@ -187,7 +248,7 @@ button:focus {
     border-radius: 0 25px 25px 25px;
 }
 
-.btn-submit{
+.btn-submit {
     font-family: var(--fontPrimary);
 
     background: var(--colorPrimaryDark);
@@ -201,7 +262,7 @@ button:focus {
     cursor: pointer;
 
     border-radius: 6px;
-    transition: 0.5s ease-in-out;
+    transition: 0.5s ease;
 }
 
 .btn-free {
@@ -209,7 +270,7 @@ button:focus {
 }
 
 .btn-submit:hover {
-    box-shadow: 0 7px 15px 3px rgba(0,0,0,0.3);
+    border-bottom: 2px solid var(--colorPrimary);
 }
 
 

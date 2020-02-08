@@ -17,7 +17,7 @@ public class DockerDescription {
     @ManyToOne
     private Template template;
     @OneToMany
-    private List<Docker> dockers;
+    private List<Docker> dockers; // TODO: cambiar por HashMap
 
     /*CONSTRUCTORS*/
     public DockerDescription() {
