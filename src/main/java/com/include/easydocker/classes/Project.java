@@ -22,9 +22,9 @@ public class Project {
     public Project() {
     }
 
-    public Project(long id, String proyectName, User user, List<Template> templates) {
+    public Project(long id, String projectName, User user, List<Template> templates) {
         this.id = id;
-        this.proyectName = proyectName;
+        this.proyectName = projectName;
         this.user = user;
         this.templates = templates;
     }

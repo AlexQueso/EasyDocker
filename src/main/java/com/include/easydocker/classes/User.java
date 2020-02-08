@@ -1,29 +1,34 @@
 package com.include.easydocker.classes;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class User {
 
+    public static final String UNKNOWN = "Unknown";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String Name;
-    private String HashedPassword;
+    private String name;
+    private String hashedPassword;
 
     @OneToMany
     private List<Project> projects;
 
     /*CONSTRUCTORS*/
-    public User() {}
+    public User() {
+        this.name = UNKNOWN;
+        this.projects = new LinkedList<>();
+    }
 
-    public User(long id, String name, String hashedPassword, List<Project> projects) {
-        this.id = id;
-        Name = name;
-        HashedPassword = hashedPassword;
+    public User(String name, String hashedPassword, List<Project> projects) {
+        this.name = name;
+        this.hashedPassword = hashedPassword;
         this.projects = projects;
     }
 
@@ -37,19 +42,19 @@ public class User {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getHashedPassword() {
-        return HashedPassword;
+        return hashedPassword;
     }
 
     public void setHashedPassword(String hashedPassword) {
-        HashedPassword = hashedPassword;
+        this.hashedPassword = hashedPassword;
     }
 
     public List<Project> getProjects() {

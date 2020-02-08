@@ -13,30 +13,57 @@
     <div class="image-container">
         <p>EasyDocker</p>
     </div>
+
+    {{#user-logged}}
+    <div class="user-info">
+        <a href="/">Log out, {{username}}</a>
+    </div>
+    {{/user-logged}}
+
+    {{#user-temporal}}
+    <div class="user-info">
+        <a href="/sign_up">Create an Account</a>
+    </div>
+    {{/user-temporal}}
+
 </header>
 
 <div class="content">
-    <div class="container-app">
 
-        {{#user}}
-        <div class="container-login-item" id="selection">
+<!--        {{#user}}-->
+    <div class="container-item" id="selection">
+        <div class="container-item-header">
+            <div class="container-item-header-title">
+                <h2>Projects</h2>
+            </div>
+            <div class="add-button">
+
+            </div>
+        </div>
+
+        <div class="container-content">
 
         </div>
-        {{/user}}
 
-        {{#project}}
-        <div class="container-login-item" id="sign-in">
+        <div class="container-item-footer">
 
         </div>
-        {{/project}}
-
-        {{#template}}
-        <div class="container-login-item" id="sign-up">
-
-        </div>
-        {{/template}}
 
     </div>
+<!--        {{/user}}-->
+
+    {{#project}}
+    <div class="container-item" id="sign-in">
+
+    </div>
+    {{/project}}
+
+    {{#template}}
+    <div class="container-item" id="sign-up">
+
+    </div>
+    {{/template}}
+
 </div>
 
 <footer>
