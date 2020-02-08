@@ -28,7 +28,7 @@
                 <div class="container-login-item-head">
                     <h2>Welcome to<br>EasyDocker</h2>
                 </div>
-                <a class="btn-submit btn-free" href="/Template/{default}">Start without an Account!</a>
+                <a class="btn-submit btn-free" href="/user-temporal">Start without an Account!</a>
                 <div class="in-up-container">
                     <a class="btn-submit" href="/sign_in">Sign In</a>
                     <a class="btn-submit" href="/sign_up">Sign Up</a>
@@ -39,7 +39,7 @@
 
         {{#sign-in}}
         <div class="container-login-item" id="sign-in">
-            <form class="form" action="/signing_in">
+            <form class="form" action="/signing_in" method="post">
 
                 <div class="container-login-item-head">
                     <h2>Welcome<br>back</h2>
@@ -69,7 +69,7 @@
         {{#sign-up}}
         <div class="container-login-item" id="sign-up">
 
-            <form class="form" action="">
+            <form class="form" action="/signing_up" method="post">
                 <div class="container-login-item-head">
                     <h2>Create a new Account</h2>
                 </div>
@@ -90,8 +90,6 @@
                     <a href="/">Back</a>
                 </div>
             </form>
-
-
 
         </div>
         {{/sign-up}}
