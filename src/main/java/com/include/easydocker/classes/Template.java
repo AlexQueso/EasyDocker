@@ -12,21 +12,20 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String templateName;
+    private String name;
 
     @ManyToOne
     private Project project;
     @OneToMany
-    private List<DockerDescription> dockerDescriptions;
+    private List<DockerDescription> dockerDescriptions; // TODO: cambiar por HashMap
     @OneToMany
-    private List<Docker> dockers;
+    private List<Docker> dockers; // TODO: cambiar por HashMap
 
     /*CONSTRUCTORS*/
     public Template(){}
 
-    public Template(Long id, String templateName, Project project, LinkedList<DockerDescription> dockerDescriptions, LinkedList<Docker> dockers) {
-        this.id = id;
-        this.templateName = templateName;
+    public Template(String name, Project project, LinkedList<DockerDescription> dockerDescriptions, LinkedList<Docker> dockers) {
+        this.name = name;
         this.project = project;
         this.dockerDescriptions = dockerDescriptions;
         this.dockers = dockers;
@@ -41,12 +40,12 @@ public class Template {
         this.id = id;
     }
 
-    public String getTemplateName() {
-        return templateName;
+    public String getName() {
+        return name;
     }
 
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
+    public void setName(String templateName) {
+        this.name = templateName;
     }
 
     public Project getProject() {

@@ -18,7 +18,7 @@ public class User {
     private String hashedPassword;
 
     @OneToMany
-    private List<Project> projects;
+    private List<Project> projects; // TODO: cambiar por HashMap
 
     /*CONSTRUCTORS*/
     public User() {

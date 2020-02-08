@@ -11,20 +11,19 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String proyectName;
+    private String name;
 
     @ManyToOne
     private User user;
     @OneToMany
-    private List<Template> templates;
+    private List<Template> templates; // TODO: cambiar por HashMap
 
     /*CONSTRUCTORS*/
     public Project() {
     }
 
-    public Project(long id, String projectName, User user, List<Template> templates) {
-        this.id = id;
-        this.proyectName = projectName;
+    public Project(String name, User user, List<Template> templates) {
+        this.name = name;
         this.user = user;
         this.templates = templates;
     }
@@ -38,12 +37,12 @@ public class Project {
         this.id = id;
     }
 
-    public String getProyectName() {
-        return proyectName;
+    public String getName() {
+        return name;
     }
 
-    public void setProyectName(String proyectName) {
-        this.proyectName = proyectName;
+    public void setName(String projectName) {
+        this.name = projectName;
     }
 
     public User getUser() {

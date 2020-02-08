@@ -30,37 +30,63 @@
 
 <div class="content">
 
-<!--        {{#user}}-->
+    {{#user}}
     <div class="container-item" id="selection">
         <div class="container-item-header">
             <div class="container-item-header-title">
                 <h2>Projects</h2>
             </div>
             <div class="add-button">
+                <a href="" class="btn-submit">New Project</a>
+            </div>
+        </div>
 
+        <div class="container-content">
+            <div class="items-list">
+                {{#projects}}
+                <a class="container-content-items"  href="/project/{{id}}">{{name}}</a>
+                {{/projects}}
+            </div>
+        </div>
+
+    </div>
+    {{/user}}
+
+    {{#project}}
+    <div class="container-item" id="sign-in">
+        <div class="container-item-header">
+            <div class="container-item-header-title">
+                <h2>Templates</h2>
+            </div>
+            <div class="add-button">
+                <a href="" class="btn-submit">New Project</a>
+            </div>
+        </div>
+
+        <div class="container-content">
+            <div class="items-list">
+                {{#templates}}
+                <a class="container-content-items" href="/template/{{id}}">{{name}}</a>
+                {{/templates}}
+            </div>
+        </div>
+    </div>
+    {{/project}}
+
+    {{#template}}
+    <div class="container-item" id="sign-up">
+        <div class="container-item-header">
+            <div class="container-item-header-title">
+                <h2>Template Editor</h2>
+            </div>
+            <div class="add-button">
+                <a href="" class="btn-submit">New Template</a>
             </div>
         </div>
 
         <div class="container-content">
 
         </div>
-
-        <div class="container-item-footer">
-
-        </div>
-
-    </div>
-<!--        {{/user}}-->
-
-    {{#project}}
-    <div class="container-item" id="sign-in">
-
-    </div>
-    {{/project}}
-
-    {{#template}}
-    <div class="container-item" id="sign-up">
-
     </div>
     {{/template}}
 
