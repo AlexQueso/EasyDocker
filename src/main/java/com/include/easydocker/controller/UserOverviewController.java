@@ -11,24 +11,24 @@ public class UserOverviewController {
     @RequestMapping("/User/{userName}")
     public String userPage(@PathVariable(value = "id")long userId, Model model){
 
-        return "user_overview";
+        return "app";
     }
 
     @RequestMapping("/create_project")
     public String createProject(Model model){
 
-        return "user_overview";
+        return "app";
     }
 
     @RequestMapping("/access_project/{id}")
     public String accessProject(@PathVariable(value = "id")long proyectId, Model model){
 
-        return "user_overview";
+        return "app";
     }
 
     @RequestMapping("/delete_project/{}")
     public String deleteProject(@PathVariable(value = "id")long proyectId, Model model){
 
-        return "user_overview";
+        return "app";
     }
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+
+<header>
+    <div class="image-container">
+        <p>EasyDocker</p>
+    </div>
+</header>
+
+<div class="content">
+    <div class="container-app">
+
+        {{#user}}
+        <div class="container-login-item" id="selection">
+
+        </div>
+        {{/user}}
+
+        {{#project}}
+        <div class="container-login-item" id="sign-in">
+
+        </div>
+        {{/project}}
+
+        {{#template}}
+        <div class="container-login-item" id="sign-up">
+
+        </div>
+        {{/template}}
+
+    </div>
+</div>
+
+<footer>
+    Include 2020
+</footer>
+
+</body>
+</html>

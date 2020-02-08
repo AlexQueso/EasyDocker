@@ -10,25 +10,21 @@ public class ProjectOverviewController {
 
     @RequestMapping("/project/{id}")
     public String ProjectPage(@PathVariable(value = "id")long projectId, Model model){
-
-        return "project_overview";
+        return "app";
     }
 
     @RequestMapping("/modify_template/{id}")
     public String modifyTemplate(@PathVariable(value = "id")long templateId, Model model){
-
-        return "project_overview";
+        return "app";
     }
 
     @RequestMapping("/create_template")
     public String createTemplate(Model model){
-
-        return "project_overview";
+        return "app";
     }
 
     @RequestMapping("/delete_template/{id}")
     public String deleteTemplate(@PathVariable(value = "id")long templateId, Model model){
-
-        return "project_overview";
+        return "app";
     }
 }
