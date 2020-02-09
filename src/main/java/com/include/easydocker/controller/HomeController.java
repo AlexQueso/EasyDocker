@@ -1,6 +1,11 @@
 package com.include.easydocker.controller;
 
+import com.include.easydocker.classes.Project;
+import com.include.easydocker.classes.Template;
 import com.include.easydocker.classes.User;
+import com.include.easydocker.repositories.ProjectRepository;
+import com.include.easydocker.repositories.TemplateRepository;
+import com.include.easydocker.repositories.UserRepository;
 import com.include.easydocker.services.UsersService;
 import com.include.easydocker.utils.Hasher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +15,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.LinkedList;
+import javax.annotation.PostConstruct;
 
 
 @Controller
 public class HomeController {
 
+    private final UsersService usersService;
+    private final UserRepository userRepository;
+    private final ProjectRepository projectRepository;
+    private final TemplateRepository templateRepository;
+
     @Autowired
-    private UsersService usersService;
+    public HomeController(UsersService usersService,
+                          UserRepository userRepository,
+                          ProjectRepository projectRepository,
+                          TemplateRepository templateRepository) {
+
+        this.usersService = usersService;
+        this.userRepository = userRepository;
+        this.projectRepository = projectRepository;
+        this.templateRepository = templateRepository;
+    }
+
+
+    @PostConstruct
+    public void init() {
+        User user = new User("user1", Hasher.hash("1234"));
+        userRepository.save(user);
+
+        Project project = new Project("project example");
+        project.setUser(user);
+        projectRepository.save(project);
+
+        Template template = new Template("template example");
+        template.setProject(project);
+        templateRepository.save(template);
+    }
 
     @GetMapping("/")
     public String home(Model model){
@@ -45,10 +79,9 @@ public class HomeController {
 
         if (newUser == null) {
 
-            newUser = new User(user, hashedPwd, new LinkedList<>());
+            newUser = new User(user, hashedPwd);
 
-            // TODO: Registrar el usuario en la base de datos.
-
+            userRepository.save(newUser);
             usersService.setUser(newUser);
 
             return "redirect:/user-overview";
@@ -75,7 +108,6 @@ public class HomeController {
     }
 
     private User checkUser(String user, String hash) {
-        // Todo: buscar en la base de datos y devover el user, o null si no se encuentra.
-        return null;
+        return userRepository.findByNameAndPassword(user, hash);
     }
 }

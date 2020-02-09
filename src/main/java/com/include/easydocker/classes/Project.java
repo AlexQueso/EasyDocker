@@ -15,20 +15,16 @@ public class Project {
 
     @ManyToOne
     private User user;
-    @OneToMany
-    private List<Template> templates; // TODO: cambiar por HashMap
 
-    /*CONSTRUCTORS*/
-    public Project() {
-    }
+    @OneToMany(mappedBy = "project")
+    private List<Template> templates;
 
-    public Project(String name, User user, List<Template> templates) {
+    public Project() {}
+
+    public Project(String name) {
         this.name = name;
-        this.user = user;
-        this.templates = templates;
     }
 
-    /*GETTERS AND SETTERS*/
     public long getId() {
         return id;
     }
@@ -61,7 +57,6 @@ public class Project {
         this.templates = templates;
     }
 
-    /*EQUALS AND HASHCODE*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

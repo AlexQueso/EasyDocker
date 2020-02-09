@@ -37,7 +37,14 @@
                 <h2>Projects</h2>
             </div>
             <div class="add-button">
-                <a href="" class="btn-submit">New Project</a>
+
+                <form method="post" class="form vertical" action="/new-project">
+                    <label class="form-entry">
+                        <input type="text" name="project_name" placeholder="Give a name" required>
+                    </label>
+                    <button class="btn-submit" type="submit">New Project</button>
+                </form>
+
             </div>
         </div>
 
@@ -59,7 +66,14 @@
                 <h2>Templates</h2>
             </div>
             <div class="add-button">
-                <a href="" class="btn-submit">New Project</a>
+
+                <form method="post" class="form vertical" action="/new-template">
+                    <label>
+                        <input type="text" name="template_name" placeholder="Give a name" required>
+                    </label>
+                    <button class="btn-submit" type="submit">New Template</button>
+                </form>
+
             </div>
         </div>
 
@@ -80,7 +94,7 @@
                 <h2>Template Editor</h2>
             </div>
             <div class="add-button">
-                <a href="" class="btn-submit">New Template</a>
+
             </div>
         </div>
 
@@ -95,6 +109,7 @@
 <footer>
     Include 2020
 </footer>
+
 
 </body>
 </html>

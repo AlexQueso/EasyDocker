@@ -15,24 +15,18 @@ public class User {
     private long id;
 
     private String name;
-    private String hashedPassword;
+    private String password;
 
-    @OneToMany
-    private List<Project> projects; // TODO: cambiar por HashMap
+    @OneToMany(mappedBy = "user")
+    private List<Project> projects;
 
-    /*CONSTRUCTORS*/
-    public User() {
-        this.name = UNKNOWN;
-        this.projects = new LinkedList<>();
-    }
+    public User() {}
 
-    public User(String name, String hashedPassword, List<Project> projects) {
+    public User(String name, String password) {
         this.name = name;
-        this.hashedPassword = hashedPassword;
-        this.projects = projects;
+        this.password = password;
     }
 
-    /*GETTERS AND SETTERS*/
     public long getId() {
         return id;
     }
@@ -49,12 +43,12 @@ public class User {
         this.name = name;
     }
 
-    public String getHashedPassword() {
-        return hashedPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
+    public void setPassword(String hashedPassword) {
+        this.password = hashedPassword;
     }
 
     public List<Project> getProjects() {
@@ -65,7 +59,6 @@ public class User {
         this.projects = projects;
     }
 
-    /*EQUALS AND HASHCODE*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

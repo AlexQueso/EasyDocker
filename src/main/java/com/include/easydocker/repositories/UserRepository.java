@@ -9,7 +9,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAll();
 
-    User findById(long id);
+    User findByNameAndPassword(String name, String password);
 
-    // User findByHashedPassWord(String hashedPassword); TODO: fix
 }

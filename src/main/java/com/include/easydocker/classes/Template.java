@@ -16,22 +16,13 @@ public class Template {
 
     @ManyToOne
     private Project project;
-    @OneToMany
-    private List<DockerDescription> dockerDescriptions; // TODO: cambiar por HashMap
-    @OneToMany
-    private List<Docker> dockers; // TODO: cambiar por HashMap
 
-    /*CONSTRUCTORS*/
-    public Template(){}
+    public Template() {}
 
-    public Template(String name, Project project, LinkedList<DockerDescription> dockerDescriptions, LinkedList<Docker> dockers) {
+    public Template(String name) {
         this.name = name;
-        this.project = project;
-        this.dockerDescriptions = dockerDescriptions;
-        this.dockers = dockers;
     }
 
-    /*GETTERS AND SETTERS*/
     public Long getId() {
         return id;
     }
@@ -56,23 +47,6 @@ public class Template {
         this.project = project;
     }
 
-    public List<DockerDescription> getDockerDescriptions() {
-        return dockerDescriptions;
-    }
-
-    public void setDockerDescriptions(List<DockerDescription> dockerDescriptions) {
-        this.dockerDescriptions = dockerDescriptions;
-    }
-
-    public List<Docker> getDockers() {
-        return dockers;
-    }
-
-    public void setDockers(List<Docker> dockers) {
-        this.dockers = dockers;
-    }
-
-    /*EQUALS AND HASHCODE*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
