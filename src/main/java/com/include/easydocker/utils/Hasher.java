@@ -21,6 +21,4 @@ public class Hasher {
 
         return new String(messageDigest.digest());
     }
-
-
 }
