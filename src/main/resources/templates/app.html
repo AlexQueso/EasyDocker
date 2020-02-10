@@ -2,47 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
-
+    <title>EasyDocker</title>
     <link rel="stylesheet" href="/styles.css">
-
 </head>
 <body>
 
-<header>
-    <div class="image-container">
-        <p>EasyDocker</p>
-    </div>
-
-    {{#user-logged}}
-    <div class="user-info">
-        <a href="/">Log out, {{username}}</a>
-    </div>
-    {{/user-logged}}
-
-    {{#user-temporal}}
-    <div class="user-info">
-        <a href="/sign_up">Create an Account</a>
-    </div>
-    {{/user-temporal}}
-
-</header>
-
 <div class="content">
+    <div class="header">
+
+        <div class="header">
+            <div class="image-container">
+                <div>
+                    <img src="/SVG/docker-easy.svg" alt="logo">
+                </div>
+                <div>EasyDocker</div>
+            </div>
+        </div>
+
+        {{#user-logged}}
+        <div class="user-info">
+            <p>{{username}}</p>
+            <a href="/log-out">Log out</a>
+        </div>
+        {{/user-logged}}
+
+        {{#user-temporal}}
+        <div class="user-info">
+            <a href="/sign_up">Create an Account</a>
+        </div>
+        {{/user-temporal}}
+    </div>
 
     {{#user}}
-    <div class="container-item" id="selection">
+    <div class="container-item">
         <div class="container-item-header">
             <div class="container-item-header-title">
                 <h2>Projects</h2>
             </div>
-            <div class="add-button">
+            <div class="add-new-form">
 
                 <form method="post" class="form vertical" action="/new-project">
-                    <label class="form-entry">
-                        <input type="text" name="project_name" placeholder="Give a name" required>
+                    <label class="form-entry-add">
+                        <input type="text" class="entry-add" name="name" placeholder="Give a name" required>
                     </label>
-                    <button class="btn-submit" type="submit">New Project</button>
+                    <button class="btn-add" type="submit">New Project</button>
                 </form>
 
             </div>
@@ -60,20 +63,18 @@
     {{/user}}
 
     {{#project}}
-    <div class="container-item" id="sign-in">
+    <div class="container-item">
         <div class="container-item-header">
             <div class="container-item-header-title">
                 <h2>Templates</h2>
             </div>
-            <div class="add-button">
-
-                <form method="post" class="form vertical" action="/new-template">
-                    <label>
-                        <input type="text" name="template_name" placeholder="Give a name" required>
+            <div class="add-new-form">
+                <form method="post" class="form vertical" action="/new-template/{{idProject}}">
+                    <label class="form-entry-add">
+                        <input type="text" name="name" placeholder="Give a name" required>
                     </label>
-                    <button class="btn-submit" type="submit">New Template</button>
+                    <button class="btn-add" type="submit">New Template</button>
                 </form>
-
             </div>
         </div>
 
@@ -88,27 +89,80 @@
     {{/project}}
 
     {{#template}}
-    <div class="container-item" id="sign-up">
+    <div class="container-item">
         <div class="container-item-header">
             <div class="container-item-header-title">
                 <h2>Template Editor</h2>
             </div>
-            <div class="add-button">
-
-            </div>
         </div>
-
         <div class="container-content">
+            <div class="editor">
+                <div class="editor-columns">
+                    <div class="editor-col" id="services">
+                        <div class="editor-col-header">
+                            <p>Services</p>
+                            <div>
+                                <form method="post" class="form vertical" action="">
+                                    <label class="form-entry-add">
+                                        <input type="text" name="name" placeholder="Give a name" required>
+                                    </label>
+                                    <button class="btn-add" type="submit">Add Service</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="editor-col-list">
 
+                        </div>
+                    </div>
+                    <div class="editor-col" id="networks">
+                        <div class="editor-col-header">
+                            <p>Networks</p>
+                            <div>
+                                <form method="post" class="form vertical" action="">
+                                    <label class="form-entry-add">
+                                        <input type="text" name="name" placeholder="Give a name" required>
+                                    </label>
+                                    <button class="btn-add" type="submit">Add Network</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="editor-col-list">
+
+                        </div>
+                    </div>
+                    <div class="editor-col" id="volumes">
+                        <div class="editor-col-header">
+                            <p>Volumes</p>
+                            <div>
+                                <form method="post" class="form vertical" action="">
+                                    <label class="form-entry-add">
+                                        <input type="text" name="name" placeholder="Give a name" required>
+                                    </label>
+                                    <button class="btn-add" type="submit">Add Volume</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="editor-col-list">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="editor-toggle">
+                    <a href="">Toggle</a>
+                </div>
+                <div class="editor-properties">
+
+                </div>
+            </div>
         </div>
     </div>
     {{/template}}
 
-</div>
+    <div class="footer">
+        <h2>Include 2020</h2>
+    </div>
 
-<footer>
-    Include 2020
-</footer>
+</div>
 
 
 </body>

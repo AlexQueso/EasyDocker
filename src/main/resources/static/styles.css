@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+/*noinspection CssUnknownTarget*/
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+/*noinspection CssUnknownTarget*/
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap');
 
 :root{
@@ -17,24 +19,57 @@ body {
     font-family: var(--fontPrimary);
 }
 
-header{
-    position: fixed;
+.header {
     width: 100%;
-    height: 100px;
+    height: 10%;
     background: var(--colorPrimary);
-    top: 0;
-    z-index: 3;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
-header p {
+.image-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 100px;
+}
+
+.image-container div {
+    color: white;
+    font-family: var(--fontTitles);
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+.user-info {
+    width: 30%;
+    margin-right: 100px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info p {
+    font-family: var(--fontTitles);
     color: white;
     font-size: 20px;
-    font-weight: bold;
-    margin: 0 100px;
+    font-weight: bolder;
 }
 
+.user-info a{
+    text-decoration: none;
+    font-family: var(--fontPrimary);
+    color: var(--colorPrimaryDark);
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+img {
+    width: 60px;
+    fill: white ;
+}
 
 .content {
     position: relative;
@@ -44,9 +79,10 @@ header p {
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: column;
 
-    background: var(--colorPrimary) url("./SVG/asset_docker.svg");
+    background: var(--colorPrimary) url("SVG/docker-easy.svg");
     background-size: 80% 80%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -73,14 +109,15 @@ a {
 
     overflow: hidden;
     display: flex;
+    box-shadow: 0 10px 18px -8px rgba(0,0,0,0.75);
 }
 
 #container-login-left{
-    background: var(--colorPrimaryDark) url("./SVG/asset_docker.svg");
-    background-attachment: fixed;
-    background-position: center;
+    background: var(--colorPrimaryDark) url("SVG/easy-docker-2.svg");
+    background-attachment: local;
+    background-position: 0 center;
     background-repeat: no-repeat;
-    background-size: 50% 50%;
+    background-size: cover;
 }
 
 .container-login-item {
@@ -126,14 +163,19 @@ a {
 
 .container-item {
     width: 90%;
-    height: 80%;
+    height: 85%;
     background: white;
+
+    top: 100px;
 
     border-radius: 24px;
 
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    box-shadow: 0 10px 18px -8px rgba(0,0,0,0.75);
+
+    z-index: 3;
 }
 
 .container-item-header {
@@ -158,7 +200,7 @@ a {
 
 .container-content {
     height: 90%;
-    background: white;
+    background: whitesmoke;
     display: flex;
 }
 
@@ -172,10 +214,10 @@ a {
 
 .container-content-items {
     height: 50px;
-    width: 95%;
-    background: white;
+    width: 90%;
+
     font-family: var(--fontTitles);
-    margin: 10px auto;
+    margin: 20px auto 0 auto;
     size: 16px;
 
     padding-left: 20px;
@@ -185,8 +227,10 @@ a {
     align-items: center;
 
     cursor: pointer;
-    transition: 0.5s ease;
 
+    text-decoration: none;
+    background-color: white;
+    color: var(--colorPrimaryDark);
 }
 
 .container-content-items:hover {
@@ -210,7 +254,7 @@ a {
 /* Form styles  */
 .form-entry{
     margin: 0 auto;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
     width: -moz-fit-content;
     width: fit-content;
@@ -226,6 +270,22 @@ select:focus,
 button:focus {
     outline: none;
 }
+
+.form-entry-add input {
+    font-family: "Nunito", sans-serif;
+    font-size: 14px;
+    padding: 2px 10px;
+    border-radius: 25px;
+
+    margin: 0 15px;
+
+    border: 2px solid var(--colorPrimaryDark);
+    height: 2em;
+    width: 10em;
+
+    transition: border-radius 0.3s ease-in;
+}
+
 .form-entry input {
     font-family: "Nunito", sans-serif;
     font-size: 16px;
@@ -242,10 +302,11 @@ button:focus {
     transition: border-radius 0.3s ease-in;
 }
 
-.form-entry input:hover{
+
+.form-entry input:hover, .form-entry-add input:hover{
     border-radius: 0 25px 25px 25px;
 }
-.form-entry input:focus{
+.form-entry input:focus, .form-entry-add input:hover{
     border-radius: 0 25px 25px 25px;
 }
 
@@ -253,8 +314,24 @@ button:focus {
     flex-direction: row;
 }
 
-.add-button {
-    padding: 15px;
+.add-new-form {
+    padding: 30px;
+}
+
+.btn-add {
+    font-family: var(--fontPrimary);
+
+    background: var(--colorPrimaryDark);
+    color: white;
+
+    border: none;
+
+    font-size: 15px;
+    padding: 8px 12px;
+    cursor: pointer;
+
+    border-radius: 10px;
+    transition: 0.5s ease;
 }
 
 .btn-submit {
@@ -269,7 +346,7 @@ button:focus {
     padding: 8px 40px;
     cursor: pointer;
 
-    border-radius: 6px;
+    border-radius: 8px;
     transition: 0.5s ease;
 }
 
@@ -277,18 +354,96 @@ button:focus {
     padding: 8px 49px;
 }
 
-.btn-submit:hover {
+.btn-submit:hover, .btn-add:hover {
     border-bottom: 2px solid var(--colorPrimary);
 }
 
 
-footer {
-    position: fixed;
-    bottom: 0;
+.footer {
+    height: 5%;
     color: white;
     background: var(--colorPrimary);
     width: 100%;
-    padding: 10px;
+
     font-family: var(--fontPrimary);
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer h2 {
+    font-family: var(--fontTitles);
+    font-size: 18px;
+}
+
+@media screen and (max-width: 755px){
+    .container-login {
+        height: 600px;
+        width: 400px;
+        background: white;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+        display: flex;
+        box-shadow: 0 10px 18px -8px rgba(0,0,0,0.75);
+    }
+
+    #container-login-left {
+        display: none;
+    }
+}
+
+.editor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-columns {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+}
+
+.editor-col {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-col:focus, .editor-col:hover {
+    background: white;
+}
+
+
+.editor-col-header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.editor-col-header p {
+    font-size: 18px;
+    font-family: var(--fontTitles);
+    color: var(--colorPrimaryDark);
+    font-weight: bolder;
+}
+
+.editor-col-list {
+    flex-grow: 1;
+}
+
+.editor-toggle {
+    background: brown;
+    width: 100%;
+}
+
+.editor-properties {
+    background: #384d54;
+    width: 100%;
+    height: 250px;
 }

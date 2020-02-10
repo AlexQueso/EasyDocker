@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1008.37 1410.77">
+    <defs>
+        <style>
+            .cls-1{fill:#ffffff;}.cls-2{fill:#ffffff;}
+        </style></defs>
+    <g id="Capa_2" data-name="Capa 2">
+        <g id="Layer_2" data-name="Layer 2">
+            <rect class="cls-1" x="177.2" y="380.15"
+                  width="128.06" height="128.06"
+                  transform="translate(155.71 -53.99)
+                  rotate(18.77)"/>
+            <rect class="cls-1" x="5.59" y="636.23" width="128.06" height="128.06" transform="translate(-63.63 9.28) rotate(-5.24)"/><rect class="cls-1" x="682.94" y="1126.54" width="128.06" height="128.06" transform="translate(-53.45 35.26) rotate(-2.61)"/><rect class="cls-1" x="5.58" y="810.35" width="128.06" height="128.06" transform="translate(-79.53 10.01) rotate(-5.24)"/><rect class="cls-1" x="181.65" y="723.31" width="128.06" height="128.06" transform="translate(36.49 -10.47) rotate(2.64)"/><rect class="cls-1" x="496.88" y="1222.61" width="128.06" height="128.06" transform="translate(127.41 -48.33) rotate(5.56)"/><rect class="cls-1" x="865.08" y="843.39" width="128.06" height="128.06" transform="translate(-214.95 292.78) rotate(-16.08)"/><path class="cls-2" d="M819.76,760c-131.6,468.87-555.91,498-555.91,498S229.37,1408,110.77,1410.77c-37.79-75.21,21.1-163.19,21.1-163.19s-82-19.22-109.92-129.66c136.46-52.91,209.55,45.51,209.55,45.51s52.38-30.9,88.26-158.75c33.64-119.85,191.17-681.1,210.78-751V0h38V254.64C666.57,281.67,923.81,389.32,819.76,760Z"/></g></g></svg>
