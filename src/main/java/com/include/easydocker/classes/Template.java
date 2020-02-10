@@ -1,7 +1,6 @@
 package com.include.easydocker.classes;
 
 import javax.persistence.*;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +15,15 @@ public class Template {
 
     @ManyToOne
     private Project project;
+
+    @OneToMany(mappedBy = "template")
+    private List<Network> networks;
+
+    @OneToMany(mappedBy = "template")
+    private List<Volume> volumes;
+
+    @ManyToMany(mappedBy = "templates")
+    private List<Service> services;
 
     public Template() {}
 
@@ -47,6 +55,30 @@ public class Template {
         this.project = project;
     }
 
+    public List<Network> getNetworks() {
+        return networks;
+    }
+
+    public void setNetworks(List<Network> networks) {
+        this.networks = networks;
+    }
+
+    public List<Volume> getVolumes() {
+        return volumes;
+    }
+
+    public void setVolumes(List<Volume> volumes) {
+        this.volumes = volumes;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,4 +91,6 @@ public class Template {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }

@@ -6,7 +6,7 @@ import com.include.easydocker.classes.User;
 import com.include.easydocker.repositories.ProjectRepository;
 import com.include.easydocker.repositories.TemplateRepository;
 import com.include.easydocker.repositories.UserRepository;
-import com.include.easydocker.services.UsersService;
+import com.include.easydocker.services.UsersSession;
 import com.include.easydocker.utils.Hasher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,23 +16,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
 public class HomeController {
 
-    private final UsersService usersService;
+    private final UsersSession usersSession;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final TemplateRepository templateRepository;
 
     @Autowired
-    public HomeController(UsersService usersService,
+    public HomeController(UsersSession usersSession,
                           UserRepository userRepository,
                           ProjectRepository projectRepository,
                           TemplateRepository templateRepository) {
 
-        this.usersService = usersService;
+        this.usersSession = usersSession;
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.templateRepository = templateRepository;
@@ -72,7 +73,7 @@ public class HomeController {
     }
 
     @PostMapping(value = "/signing_up")
-    public String signUp(Model model, @RequestParam String user, @RequestParam String password ) {
+    public String signUp(Model model, @RequestParam String user, @RequestParam String password, HttpSession session) {
 
         String hashedPwd = Hasher.hash(password);
         User newUser = checkUser(user, hashedPwd);
@@ -82,7 +83,9 @@ public class HomeController {
             newUser = new User(user, hashedPwd);
 
             userRepository.save(newUser);
-            usersService.setUser(newUser);
+            usersSession.setUser(newUser);
+
+            session.setAttribute("user", newUser);
 
             return "redirect:/user-overview";
         }
@@ -98,7 +101,7 @@ public class HomeController {
         User welcomeUser = checkUser(user, Hasher.hash(password));
 
         if (welcomeUser != null) {
-            usersService.setUser(welcomeUser);
+            usersSession.setUser(welcomeUser);
             return "redirect:/user-overview";
         }
 

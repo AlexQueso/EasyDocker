@@ -6,32 +6,32 @@ import com.include.easydocker.classes.User;
 import com.include.easydocker.repositories.ProjectRepository;
 import com.include.easydocker.repositories.TemplateRepository;
 import com.include.easydocker.repositories.UserRepository;
-import com.include.easydocker.services.UsersService;
+import com.include.easydocker.services.UsersSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 
 @Controller
 public class AppController {
 
-    private final UsersService usersService;
+    private final UsersSession usersSession;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final TemplateRepository templateRepository;
 
     @Autowired
-    public AppController(UsersService usersService,
-                          UserRepository userRepository,
-                          ProjectRepository projectRepository,
-                          TemplateRepository templateRepository) {
+    public AppController(UsersSession usersSession,
+                         UserRepository userRepository,
+                         ProjectRepository projectRepository,
+                         TemplateRepository templateRepository) {
 
-        this.usersService = usersService;
+        this.usersSession = usersSession;
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.templateRepository = templateRepository;
@@ -41,44 +41,57 @@ public class AppController {
     @GetMapping("/user-overview")
     public String userPage(Model model) {
 
-        if(usersService.getUser().getName().equals(User.UNKNOWN))
-            model.addAttribute("user-temporal", true);
-        else
-            model.addAttribute("user-logged", true);
+        showLoggedInfoOrTemporal(model);
 
-        model.addAttribute("username", usersService.getUser().getName());
         model.addAttribute("user", true);
-        model.addAttribute("projects", projectRepository.findByUser(usersService.getUser()));
+        model.addAttribute("projects", projectRepository.findByUser(usersSession.getUser()));
 
         return "app";
     }
 
-    @PostMapping(value = "/new-project")
-    public String createProject(@RequestParam String project_name) {
+    public void showLoggedInfoOrTemporal(Model model) {
+        if(usersSession.getUser().getName().equals(User.UNKNOWN))
+            model.addAttribute("user-temporal", true);
+        else
+            model.addAttribute("user-logged", true);
 
-        Project project = new Project(project_name);
-        project.setUser(usersService.getUser());
+        model.addAttribute("username", usersSession.getUser().getName());
+    }
+
+    @PostMapping(value = "/new-project")
+    public String createProject(Project project) {
+
+        project.setUser(usersSession.getUser());
         projectRepository.save(project);
 
         return "redirect:/user-overview";
     }
 
     @PostMapping(value = "/new-template/{idProject}")
-    public String createTemplate(@PathVariable long idProject, @RequestParam String template_name) {
+    public String createTemplate(@PathVariable long idProject, Template template) {
 
-        Template template = new Template(template_name);
         template.setProject(projectRepository.findById(idProject));
         templateRepository.save(template);
 
-        return "redirect:/user-overview";
+        return "redirect:/project/" + idProject;
+    }
+
+    @GetMapping("/log-out")
+    public String logOut(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 
     @GetMapping("/project/{id}")
     public String projectOverview(@PathVariable long id, Model model) {
 
+        showLoggedInfoOrTemporal(model);
+
         Project p = projectRepository.findById(id);
 
         model.addAttribute("templates", p.getTemplates());
+        model.addAttribute("idProject", p.getId());
+
         model.addAttribute("project", true);
 
         return "app";
@@ -87,22 +100,28 @@ public class AppController {
     @GetMapping("/template/{id}")
     public String templateOverview(@PathVariable long id, Model model) {
 
+        showLoggedInfoOrTemporal(model);
+
         Template t = templateRepository.findById(id);
 
+        model.addAttribute("idTemplate", t.getId());
         model.addAttribute("template", true);
 
         return "app";
     }
 
     @GetMapping("/user-temporal")
-    public String temporalPage(Model model) {
+    public String temporalPage(Model model, HttpSession session) {
+
+        /* TODO: arreglar flujo del usuario temporal */
 
         User unknownUser = new User();
         unknownUser.setId(System.currentTimeMillis());
         unknownUser.setName(User.UNKNOWN);
         unknownUser.setProjects(new LinkedList<>());
 
-        usersService.setUser(unknownUser);
+        usersSession.setUser(unknownUser);
+        session.setAttribute("user", unknownUser);
 
         return "redirect:/user-overview";
     }
