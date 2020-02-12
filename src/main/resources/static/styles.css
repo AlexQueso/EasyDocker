@@ -113,7 +113,7 @@ a {
 }
 
 #container-login-left{
-    background: var(--colorPrimaryDark) url("SVG/easy-docker-2.svg");
+    background: var(--colorPrimaryDark) url("SVG/docker-easy.svg");
     background-attachment: local;
     background-position: 0 center;
     background-repeat: no-repeat;
@@ -364,7 +364,7 @@ button:focus {
     color: white;
     background: var(--colorPrimary);
     width: 100%;
-
+    z-index: 1;
     font-family: var(--fontPrimary);
     display: flex;
     align-items: center;
@@ -412,11 +412,6 @@ button:focus {
     display: flex;
     flex-direction: column;
 }
-
-.editor-col:focus, .editor-col:hover {
-    background: white;
-}
-
 
 .editor-col-header {
     width: 100%;
