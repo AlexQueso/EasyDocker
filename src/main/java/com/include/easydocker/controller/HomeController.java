@@ -96,15 +96,17 @@ public class HomeController {
     }
 
     @PostMapping(value = "/signing_in")
-    public String signIn(Model model, @RequestParam String user, @RequestParam String password ) {
+    public String signIn(Model model, @RequestParam String user, @RequestParam String password, HttpSession session) {
 
         User welcomeUser = checkUser(user, Hasher.hash(password));
 
         if (welcomeUser != null) {
             usersSession.setUser(welcomeUser);
+            usersSession.getUser().setProjects(projectRepository.findByUser(welcomeUser));
+            session.setAttribute("user", welcomeUser);
+
             return "redirect:/user-overview";
         }
-
         model.addAttribute("sign-in", true);
 
         return "home";

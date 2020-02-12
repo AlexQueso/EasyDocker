@@ -8,7 +8,7 @@ import java.util.Objects;
 @Entity
 public class User {
 
-    public static final String UNKNOWN = "Unknown";
+    public static final String UNKNOWN = "curgfchgfr5icgrfxbrfjcgr5kjgxtirgcltgch5lticht5ilhc";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
