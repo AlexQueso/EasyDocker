@@ -6,6 +6,7 @@ import com.include.easydocker.classes.User;
 import com.include.easydocker.repositories.ProjectRepository;
 import com.include.easydocker.repositories.TemplateRepository;
 import com.include.easydocker.repositories.UserRepository;
+import com.include.easydocker.services.AppService;
 import com.include.easydocker.services.UsersSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,59 +21,43 @@ import java.util.LinkedList;
 @Controller
 public class AppController {
 
-    private final UsersSession usersSession;
-    private final UserRepository userRepository;
-    private final ProjectRepository projectRepository;
-    private final TemplateRepository templateRepository;
-
     @Autowired
-    public AppController(UsersSession usersSession,
-                         UserRepository userRepository,
-                         ProjectRepository projectRepository,
-                         TemplateRepository templateRepository) {
-
-        this.usersSession = usersSession;
-        this.userRepository = userRepository;
-        this.projectRepository = projectRepository;
-        this.templateRepository = templateRepository;
-    }
+    public AppService appService;
 
 
     @GetMapping("/user-overview")
     public String userPage(Model model) {
-
-        showLoggedInfoOrTemporal(model);
+        /*
+        appService.showLoggedInfoOrTemporal(model);
 
         model.addAttribute("user", true);
-        model.addAttribute("projects", projectRepository.findByUser(usersSession.getUser()));
-
+        model.addAttribute("projects", usersSession.getUser().getProjects());
+        */
+        appService.userPage(model);
         return "app";
-    }
 
-    public void showLoggedInfoOrTemporal(Model model) {
-        if(usersSession.getUser().getName().equals(User.UNKNOWN))
-            model.addAttribute("user-temporal", true);
-        else
-            model.addAttribute("user-logged", true);
-
-        model.addAttribute("username", usersSession.getUser().getName());
     }
 
     @PostMapping(value = "/new-project")
     public String createProject(Project project) {
-
+        /*
         project.setUser(usersSession.getUser());
-        projectRepository.save(project);
-
+        if (!usersSession.getUser().getName().equals(User.UNKNOWN)){
+            projectRepository.save(project);
+        } else {
+            usersSession.getUser().getProjects().add(project);
+        }*/
+        appService.createProject(project);
         return "redirect:/user-overview";
     }
 
     @PostMapping(value = "/new-template/{idProject}")
     public String createTemplate(@PathVariable long idProject, Template template) {
-
+        /*
         template.setProject(projectRepository.findById(idProject));
         templateRepository.save(template);
-
+        */
+        appService.createTemplate(idProject, template);
         return "redirect:/project/" + idProject;
     }
 
@@ -84,7 +69,7 @@ public class AppController {
 
     @GetMapping("/project/{id}")
     public String projectOverview(@PathVariable long id, Model model) {
-
+        /*
         showLoggedInfoOrTemporal(model);
 
         Project p = projectRepository.findById(id);
@@ -93,28 +78,28 @@ public class AppController {
         model.addAttribute("idProject", p.getId());
 
         model.addAttribute("project", true);
-
+         */
+        appService.projectOverview(id, model);
         return "app";
     }
 
     @GetMapping("/template/{id}")
     public String templateOverview(@PathVariable long id, Model model) {
-
+        /*
         showLoggedInfoOrTemporal(model);
 
         Template t = templateRepository.findById(id);
 
         model.addAttribute("idTemplate", t.getId());
         model.addAttribute("template", true);
-
+        */
+        appService.templateOverview(id, model);
         return "app";
     }
 
     @GetMapping("/user-temporal")
     public String temporalPage(Model model, HttpSession session) {
-
-        /* TODO: arreglar flujo del usuario temporal */
-
+        /*
         User unknownUser = new User();
         unknownUser.setId(System.currentTimeMillis());
         unknownUser.setName(User.UNKNOWN);
@@ -122,7 +107,8 @@ public class AppController {
 
         usersSession.setUser(unknownUser);
         session.setAttribute("user", unknownUser);
-
+        */
+        appService.temporalPage(model);
         return "redirect:/user-overview";
     }
 
