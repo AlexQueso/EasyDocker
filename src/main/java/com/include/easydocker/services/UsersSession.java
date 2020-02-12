@@ -29,12 +29,11 @@ public class UsersSession {
     }
 
     public Template findTemplateById(long idTemplate){
-        for (Project p: user.getProjects()){
-            for (Template t: p.getTemplates()){
+        for (Project p: user.getProjects())
+            for (Template t: p.getTemplates())
                 if (t.getId() == idTemplate)
                     return t;
-            }
-        }
+
         return null;
     }
 }
