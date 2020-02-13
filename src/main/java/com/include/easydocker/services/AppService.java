@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 @Component
 public class AppService {
@@ -42,118 +43,88 @@ public class AppService {
         model.addAttribute("username", usersSession.getUser().getName());
     }
 
-    public void userPage(Model model) {
-        showLoggedInfoOrTemporal(model);
-        if (temporalUser()){
-            model.addAttribute("projects", usersSession.getUser().getProjects());
-        } else {
-            if (usersSession.getUser().getProjects() == null)
-                usersSession.getUser().setProjects(new LinkedList<>());
-            model.addAttribute("projects", projectRepository.findByUser(usersSession.getUser()));
-        }
-        model.addAttribute("user", true);
-    }
-
-    public void temporalPage(Model model){
-        User unknownUser = new User();
-        unknownUser.setId(System.currentTimeMillis());
-        unknownUser.setName(User.UNKNOWN);
-        unknownUser.setProjects(new LinkedList<>());
-        usersSession.setUser(unknownUser);
-    }
-
     public void createProject(Project project){
         project.setUser(usersSession.getUser());
         project.setTemplates(new LinkedList<>());
 
+        usersSession.getUser().getProjects().add(project);
+
         if (!temporalUser())
             projectRepository.save(project);
-
-        usersSession.getUser().getProjects().add(project);
     }
 
     public void createTemplate(long idProject, Template template){
-        Project p;
+        Project p = usersSession.findProjectById(idProject);
         template.setNetworks(new LinkedList<>());
         template.setServices(new LinkedList<>());
         template.setVolumes(new LinkedList<>());
-        if (temporalUser()){
-            p = usersSession.findProjectById(idProject);
-//            if (p.getTemplates() == null) //no deberia hacer falta este if
-//                p.setTemplates(new LinkedList<>());
-        } else {
-            p = projectRepository.findById(idProject);
-            templateRepository.save(template);
-        }
+
         template.setProject(p);
         p.getTemplates().add(template);
+
+        if (!temporalUser())
+            templateRepository.save(template);
     }
 
     public void createService(long idTemplate, Service service) {
-        Template t;
+        Template t = usersSession.findTemplateById(idTemplate);
         service.setTemplates(new LinkedList<>());
-        if (temporalUser())
-            t = usersSession.findTemplateById(idTemplate);
-        else {
-            t = templateRepository.findById(idTemplate);
-            serviceRepository.save(service);
-        }
+
         service.getTemplates().add(t);
         t.getServices().add(service);
+
+        if (!temporalUser())
+            serviceRepository.save(service);
     }
 
     public void createNetwork(long idTemplate, Network network) {
-        Template t;
-        if (temporalUser())
-            t = usersSession.findTemplateById(idTemplate);
-        else {
-            t = templateRepository.findById(idTemplate);
-            networkRepository.save(network);
-        }
+        Template t = usersSession.findTemplateById(idTemplate);
         network.setTemplate(t);
         t.getNetworks().add(network);
+
+        if (!temporalUser())
+            networkRepository.save(network);
     }
 
     public void createVolume(long idTemplate, Volume volume) {
-        Template t;
-        if (temporalUser())
-            t = usersSession.findTemplateById(idTemplate);
-        else {
-            t = templateRepository.findById(idTemplate);
-            volumesRepository.save(volume);
-        }
+        Template t = usersSession.findTemplateById(idTemplate);
         volume.setTemplate(t);
         t.getVolumes().add(volume);
+
+        if (!temporalUser())
+            volumesRepository.save(volume);
     }
 
-    public void projectOverview(long idProject, Model model) {
-        showLoggedInfoOrTemporal(model);
+    public List<Project> userOverview() {
+        if (usersSession.getUser().getProjects() == null)
+            usersSession.getUser().setProjects(new LinkedList<>());
 
-        Project p;
-        if (usersSession.getUser().getName().equals(User.UNKNOWN)){
-            p = usersSession.findProjectById(idProject);
-        } else {
-            p = projectRepository.findById(idProject);
-        }
-        model.addAttribute("templates", p.getTemplates());
-        model.addAttribute("idProject", p.getId());
-        model.addAttribute("project", true);
+        if (temporalUser())
+            return usersSession.getUser().getProjects();
+        else
+            return projectRepository.findByUser(usersSession.getUser());
     }
 
-    public void templateOverview(long idTemplate,  Model model){
-        showLoggedInfoOrTemporal(model);
-        Template t;
-        if (usersSession.getUser().getName().equals(User.UNKNOWN)){
-            t = usersSession.findTemplateById(idTemplate);
-        } else {
-            t = templateRepository.findById(idTemplate);
-        }
-        model.addAttribute("idTemplate", t.getId());
-        model.addAttribute("template", true);
+    public Project projectOverview(long idProject) {
+        if (temporalUser())
+            return usersSession.findProjectById(idProject);
+        else
+            return projectRepository.findById(idProject);
+    }
+
+    public Template templateOverview(long idTemplate){
+        if (temporalUser())
+            return usersSession.findTemplateById(idTemplate);
+        else
+            return templateRepository.findById(idTemplate);
     }
 
     private boolean temporalUser(){
         return usersSession.getUser().getName().equals(User.UNKNOWN);
+    }
+
+    public UsersSession getUsersSession() {
+        return usersSession;
     }
 
 }
