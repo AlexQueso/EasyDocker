@@ -127,4 +127,11 @@ public class AppService {
         return usersSession;
     }
 
+    public void temporalPage() {
+        User unknownUser = new User();
+        unknownUser.setId(System.currentTimeMillis());
+        unknownUser.setName(User.UNKNOWN);
+        unknownUser.setProjects(new LinkedList<>());
+        usersSession.setUser(unknownUser);
+    }
 }

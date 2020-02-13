@@ -89,4 +89,10 @@ public class AppController {
                 .getUser().getName());
     }
 
+    @GetMapping("/user-temporal")
+    public String temporalPage() {
+        appService.temporalPage();
+        return "redirect:/user-overview";
+    }
+
 }
