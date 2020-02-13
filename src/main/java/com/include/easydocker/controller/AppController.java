@@ -19,13 +19,20 @@ import java.util.LinkedList;
 @Controller
 public class AppController {
 
-    @Autowired
-    public AppService appService;
+    public final AppService appService;
 
+    @Autowired
+    public AppController(AppService appService) {
+        this.appService = appService;
+    }
 
     @GetMapping("/user-overview")
     public String userPage(Model model) {
-        appService.userPage(model);
+        showLoggedInfoOrTemporal(model);
+
+        model.addAttribute("projects", appService.userOverview());
+        model.addAttribute("user", true);
+
         return "app";
     }
 
@@ -49,20 +56,37 @@ public class AppController {
 
     @GetMapping("/project/{id}")
     public String projectOverview(@PathVariable long id, Model model) {
-        appService.projectOverview(id, model);
+        showLoggedInfoOrTemporal(model);
+
+        Project p = appService.projectOverview(id);
+
+        model.addAttribute("templates", p.getTemplates());
+        model.addAttribute("idProject", p.getId());
+        model.addAttribute("project", true);
+
         return "app";
     }
 
     @GetMapping("/template/{id}")
     public String templateOverview(@PathVariable long id, Model model) {
-        appService.templateOverview(id, model);
+        showLoggedInfoOrTemporal(model);
+
+        Template t = appService.templateOverview(id);
+
+        model.addAttribute("idTemplate", t.getId());
+        model.addAttribute("template", true);
+
         return "app";
     }
 
-    @GetMapping("/user-temporal")
-    public String temporalPage(Model model, HttpSession session) {
-        appService.temporalPage(model);
-        return "redirect:/user-overview";
+    private void showLoggedInfoOrTemporal(Model model) {
+        if(appService.getUsersSession().isLogged())
+            model.addAttribute("user-logged", true);
+        else
+            model.addAttribute("user-temporal", true);
+
+        model.addAttribute("username", appService.getUsersSession()
+                .getUser().getName());
     }
 
 }

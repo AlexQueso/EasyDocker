@@ -10,7 +10,17 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class UsersSession {
 
+    boolean logged = false;
+
     private User user;
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
 
     public User getUser() {
         return user;
