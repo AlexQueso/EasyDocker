@@ -16,7 +16,7 @@ public class User {
     private String name;
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Project> projects;
 
     public User() {}

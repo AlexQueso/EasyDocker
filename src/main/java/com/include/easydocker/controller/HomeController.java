@@ -1,13 +1,7 @@
 package com.include.easydocker.controller;
 
-import com.include.easydocker.classes.Project;
-import com.include.easydocker.classes.Template;
-import com.include.easydocker.classes.User;
-import com.include.easydocker.repositories.ProjectRepository;
-import com.include.easydocker.repositories.TemplateRepository;
-import com.include.easydocker.repositories.UserRepository;
-import com.include.easydocker.services.UsersSession;
-import com.include.easydocker.utils.Hasher;
+import com.include.easydocker.services.HomeService;
+import com.include.easydocker.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,43 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpSession;
-
-
 @Controller
 public class HomeController {
 
-    private final UsersSession usersSession;
-    private final UserRepository userRepository;
-    private final ProjectRepository projectRepository;
-    private final TemplateRepository templateRepository;
+    public final HomeService homeService;
 
     @Autowired
-    public HomeController(UsersSession usersSession,
-                          UserRepository userRepository,
-                          ProjectRepository projectRepository,
-                          TemplateRepository templateRepository) {
-
-        this.usersSession = usersSession;
-        this.userRepository = userRepository;
-        this.projectRepository = projectRepository;
-        this.templateRepository = templateRepository;
-    }
-
-
-    @PostConstruct
-    public void init() {
-        User user = new User("user1", Hasher.hash("1234"));
-        userRepository.save(user);
-
-        Project project = new Project("project example");
-        project.setUser(user);
-        projectRepository.save(project);
-
-        Template template = new Template("template example");
-        template.setProject(project);
-        templateRepository.save(template);
+    public HomeController(HomeService homeService) {
+        this.homeService = homeService;
     }
 
     @GetMapping("/")
@@ -73,22 +38,10 @@ public class HomeController {
     }
 
     @PostMapping(value = "/signing_up")
-    public String signUp(Model model, @RequestParam String user, @RequestParam String password, HttpSession session) {
+    public String signUp(Model model, @RequestParam String user, @RequestParam String password) {
 
-        String hashedPwd = Hasher.hash(password);
-        User newUser = checkUser(user, hashedPwd);
-
-        if (newUser == null) {
-
-            newUser = new User(user, hashedPwd);
-
-            userRepository.save(newUser);
-            usersSession.setUser(newUser);
-
-            session.setAttribute("user", newUser);
-
-            return "redirect:/user-overview";
-        }
+        if (homeService.signedUpSuccessfully(user, password))
+            return Utils.redirectTo("/user-overview");
 
         model.addAttribute("sign-up", true);
 
@@ -96,23 +49,19 @@ public class HomeController {
     }
 
     @PostMapping(value = "/signing_in")
-    public String signIn(Model model, @RequestParam String user, @RequestParam String password, HttpSession session) {
+    public String signIn(Model model, @RequestParam String user, @RequestParam String password) {
 
-        User welcomeUser = checkUser(user, Hasher.hash(password));
+        if(homeService.signedInSuccessfully(user, password))
+            return Utils.redirectTo("/user-overview");
 
-        if (welcomeUser != null) {
-            usersSession.setUser(welcomeUser);
-            usersSession.getUser().setProjects(projectRepository.findByUser(welcomeUser));
-            session.setAttribute("user", welcomeUser);
-
-            return "redirect:/user-overview";
-        }
         model.addAttribute("sign-in", true);
 
         return "home";
     }
 
-    private User checkUser(String user, String hash) {
-        return userRepository.findByNameAndPassword(user, hash);
+    @GetMapping("/user-temporal")
+    public String createUserTemporal() {
+        homeService.createUserTemporal();
+        return Utils.redirectTo("/user-overview");
     }
 }

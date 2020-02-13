@@ -1,11 +1,9 @@
 package com.include.easydocker.controller;
 
-import com.include.easydocker.classes.*;
-import com.include.easydocker.repositories.ProjectRepository;
-import com.include.easydocker.repositories.TemplateRepository;
-import com.include.easydocker.repositories.UserRepository;
+import com.include.easydocker.classes.Project;
+import com.include.easydocker.classes.Template;
 import com.include.easydocker.services.AppService;
-import com.include.easydocker.services.UsersSession;
+import com.include.easydocker.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.LinkedList;
 
 @Controller
 public class AppController {
@@ -26,32 +23,22 @@ public class AppController {
         this.appService = appService;
     }
 
-    @GetMapping("/user-overview")
-    public String userPage(Model model) {
-        showLoggedInfoOrTemporal(model);
-
-        model.addAttribute("projects", appService.userOverview());
-        model.addAttribute("user", true);
-
-        return "app";
-    }
-
     @PostMapping(value = "/new-project")
     public String createProject(Project project) {
         appService.createProject(project);
-        return "redirect:/user-overview";
+        return Utils.redirectTo("/user-overview");
     }
 
     @PostMapping(value = "/new-template/{idProject}")
     public String createTemplate(@PathVariable long idProject, Template template) {
         appService.createTemplate(idProject, template);
-        return "redirect:/project/" + idProject;
+        return Utils.redirectTo("/project/" + idProject);
     }
 
     @GetMapping("/log-out")
     public String logOut(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
+        return Utils.redirectTo("/");
     }
 
     @GetMapping("/project/{id}")
@@ -79,6 +66,16 @@ public class AppController {
         return "app";
     }
 
+    @GetMapping("/user-overview")
+    public String userOverview(Model model) {
+        showLoggedInfoOrTemporal(model);
+
+        model.addAttribute("projects", appService.userOverview());
+        model.addAttribute("user", true);
+
+        return "app";
+    }
+
     private void showLoggedInfoOrTemporal(Model model) {
         if(appService.getUsersSession().isLogged())
             model.addAttribute("user-logged", true);
@@ -88,11 +85,4 @@ public class AppController {
         model.addAttribute("username", appService.getUsersSession()
                 .getUser().getName());
     }
-
-    @GetMapping("/user-temporal")
-    public String temporalPage() {
-        appService.temporalPage();
-        return "redirect:/user-overview";
-    }
-
 }

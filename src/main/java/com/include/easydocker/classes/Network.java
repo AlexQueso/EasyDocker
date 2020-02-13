@@ -14,8 +14,7 @@ public class Network {
     @ManyToOne
     private Template template;
 
-    public Network() {
-    }
+    public Network() {}
 
     public Network(String name){
         this.name = name;

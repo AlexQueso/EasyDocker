@@ -12,8 +12,8 @@ public class Service {
 
     private String name;
 
-    @ManyToMany
-    private List<Template> templates;
+    @ManyToOne
+    private Template template;
 
     public Service() {
     }
@@ -38,11 +38,11 @@ public class Service {
         this.name = name;
     }
 
-    public List<Template> getTemplates() {
-        return templates;
+    public Template getTemplate() {
+        return template;
     }
 
-    public void setTemplates(List<Template> templates) {
-        this.templates = templates;
+    public void setTemplate(Template template) {
+        this.template = template;
     }
 }

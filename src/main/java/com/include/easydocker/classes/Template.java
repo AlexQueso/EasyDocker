@@ -22,7 +22,7 @@ public class Template {
     @OneToMany(mappedBy = "template")
     private List<Volume> volumes;
 
-    @ManyToMany(mappedBy = "templates")
+    @OneToMany(mappedBy = "template")
     private List<Service> services;
 
     public Template() {}
