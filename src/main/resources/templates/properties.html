@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="content">
+    <div class="header">
+
+        <div class="header">
+            <div class="image-container">
+                <div>
+                    <img src="/SVG/docker-easy.svg" alt="logo">
+                </div>
+                <div>EasyDocker</div>
+            </div>
+        </div>
+
+        {{#user-logged}}
+        <div class="user-info">
+            <p>{{username}}</p>
+            <a href="/log-out">Log out</a>
+        </div>
+        {{/user-logged}}
+
+        {{#user-temporal}}
+        <div class="user-info">
+            <a href="/sign_up">Create an Account</a>
+        </div>
+        {{/user-temporal}}
+    </div>
+
+    <div class="container-item">
+        <div class="container-item-header">
+            <div class="container-item-header-title">
+                <h2>Name</h2> <!-- aqui poner service <name> o volume <name> o network <name> -->
+            </div>
+        </div>
+
+        <div class="container-content">
+            <!-- aqui hay que poner las properties -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2>Include &copy; 2020</h2>
+    </div>
+</div>
+
+</body>
+</html>
