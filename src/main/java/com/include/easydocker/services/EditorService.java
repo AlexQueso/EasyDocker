@@ -21,27 +21,43 @@ public class EditorService {
     }
 
     public void createService(long idTemplate, Service service) {
-        service.setTemplate(usersSession.getTemplate(idTemplate));
-        usersSession.addService(service);
 
-        if (usersSession.isLogged())
+        if (usersSession.isLogged()) {
+            service.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
             repositoryManager.getServiceRepository().save(service);
+        }
+        else {
+            service.setTemplate(usersSession.getTemplate(idTemplate));
+            usersSession.addService(service);
+        }
+
     }
 
     public void createNetwork(long idTemplate, Network network) {
-        network.setTemplate(usersSession.getTemplate(idTemplate));
-        usersSession.addNetwork(network);
 
-        if (usersSession.isLogged())
+        if (usersSession.isLogged()){
+            network.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
             repositoryManager.getNetworkRepository().save(network);
+        }
+        else {
+            network.setTemplate(usersSession.getTemplate(idTemplate));
+            usersSession.addNetwork(network);
+        }
+
     }
 
     public void createVolume(long idTemplate, Volume volume) {
-        volume.setTemplate(usersSession.getTemplate(idTemplate));
-        usersSession.addVolume(volume);
 
-        if (usersSession.isLogged())
+        if (usersSession.isLogged()) {
+            volume.setTemplate(repositoryManager
+                    .getTemplateRepository().findById(idTemplate));
             repositoryManager.getVolumesRepository().save(volume);
+        }
+        else {
+            volume.setTemplate(usersSession.getTemplate(idTemplate));
+            usersSession.addVolume(volume);
+        }
+
     }
 
 }

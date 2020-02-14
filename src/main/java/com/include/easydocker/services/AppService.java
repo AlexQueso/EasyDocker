@@ -7,7 +7,6 @@ import com.include.easydocker.session.UsersSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,30 +24,33 @@ public class AppService {
 
     public void createProject(Project project){
         project.setUser(usersSession.getUser());
-        usersSession.addProject(project);
-
         if (usersSession.isLogged())
             repositoryManager.getProjectRepository().save(project);
+        else
+            usersSession.addProject(project);
     }
 
     public void createTemplate(long idProject, Template template){
-        template.setProject(usersSession.getProject(idProject));
-        usersSession.addTemplate(template);
 
-        if (usersSession.isLogged())
+        if (usersSession.isLogged()) {
+            template.setProject(repositoryManager
+                    .getProjectRepository().findById(idProject));
             repositoryManager.getTemplateRepository().save(template);
+        }
+        else {
+            template.setProject(usersSession.getProject(idProject));
+            usersSession.addTemplate(template);
+        }
+
     }
 
     public List<Project> userOverview() {
-        if (usersSession.getUser().getProjects() == null)
-            usersSession.getUser().setProjects(new LinkedList<>());
-
         if (usersSession.isLogged())
             return repositoryManager
                     .getProjectRepository()
                     .findByUser(usersSession.getUser());
         else
-            return new ArrayList<>(usersSession
+            return new LinkedList<>(usersSession
                     .getTemporalUserInformation()
                     .getProjects().values());
     }
