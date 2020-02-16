@@ -15,6 +15,12 @@ public class Service {
     @ManyToOne
     private Template template;
 
+    @ManyToMany(mappedBy = "service")
+    private List<Network> networks;
+
+    @ManyToMany(mappedBy = "service")
+    private List<Volume> volumes;
+
     public Service() {
     }
 
@@ -22,11 +28,11 @@ public class Service {
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -44,6 +50,22 @@ public class Service {
 
     public void setTemplate(Template template) {
         this.template = template;
+    }
+
+    public List<Network> getNetworks() {
+        return networks;
+    }
+
+    public void setNetworks(List<Network> networks) {
+        this.networks = networks;
+    }
+
+    public List<Volume> getVolumes() {
+        return volumes;
+    }
+
+    public void setVolumes(List<Volume> volumes) {
+        this.volumes = volumes;
     }
 }
 

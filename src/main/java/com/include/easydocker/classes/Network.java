@@ -1,6 +1,7 @@
 package com.include.easydocker.classes;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Network {
@@ -13,6 +14,9 @@ public class Network {
 
     @ManyToOne
     private Template template;
+
+    @ManyToMany
+    private List<Service> services;
 
     public Network() {}
 
@@ -42,5 +46,13 @@ public class Network {
 
     public void setTemplate(Template template) {
         this.template = template;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }

@@ -1,6 +1,7 @@
 package com.include.easydocker.classes;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Volume {
@@ -14,6 +15,9 @@ public class Volume {
     @ManyToOne
     private Template template;
 
+    @ManyToMany
+    private List<Service> services;
+
     public Volume() {
     }
 
@@ -21,11 +25,11 @@ public class Volume {
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -43,5 +47,13 @@ public class Volume {
 
     public void setTemplate(Template template) {
         this.template = template;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }
