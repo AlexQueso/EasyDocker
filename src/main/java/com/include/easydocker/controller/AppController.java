@@ -63,6 +63,10 @@ public class AppController {
         model.addAttribute("idTemplate", t.getId());
         model.addAttribute("template", true);
 
+        model.addAttribute("services", t.getServices());
+        model.addAttribute("networks", t.getNetworks());
+        model.addAttribute("volumes", t.getVolumes());
+
         return "app";
     }
 

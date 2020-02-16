@@ -77,4 +77,8 @@ public class UsersSession {
 
         return template;
     }
+
+    public Network getNetwork(long id) {
+        return temporalUserInformation.getNetwork().get(id);
+    }
 }

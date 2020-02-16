@@ -24,6 +24,7 @@ public class AppService {
 
     public void createProject(Project project){
         project.setUser(usersSession.getUser());
+        project.setId(System.currentTimeMillis());
         if (usersSession.isLogged())
             repositoryManager.getProjectRepository().save(project);
         else
@@ -31,7 +32,7 @@ public class AppService {
     }
 
     public void createTemplate(long idProject, Template template){
-
+        template.setId(System.currentTimeMillis());
         if (usersSession.isLogged()) {
             template.setProject(repositoryManager
                     .getProjectRepository().findById(idProject));
@@ -41,7 +42,6 @@ public class AppService {
             template.setProject(usersSession.getProject(idProject));
             usersSession.addTemplate(template);
         }
-
     }
 
     public List<Project> userOverview() {
