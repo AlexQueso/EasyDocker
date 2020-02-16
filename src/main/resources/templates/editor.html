@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editor</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="content">
+    <div class="header">
+
+        <div class="header">
+            <div class="image-container">
+                <div>
+                    <img src="/SVG/docker-easy.svg" alt="logo">
+                </div>
+                <div>EasyDocker</div>
+            </div>
+        </div>
+
+        {{#user-logged}}
+        <div class="user-info">
+            <p>{{username}}</p>
+            <a href="/log-out">Log out</a>
+        </div>
+        {{/user-logged}}
+
+        {{#user-temporal}}
+        <div class="user-info">
+            <a href="/sign_up">Create an Account</a>
+        </div>
+        {{/user-temporal}}
+    </div>
+
+    {{#network}}
+    <div class="container-item">
+        <div class="container-item-header">
+            <div class="container-item-header-title">
+                <h2>Network: {{nameNetwork}}</h2>
+            </div>
+            <div class="container-item-header-button">
+                <a href="/template/{{idTemplate}}">Back</a>
+            </div>
+        </div>
+
+        <div class="container-content">
+            <div class="editor">
+                <div class="editor-columns">
+                    <div class="editor-col" id="services">
+                        <div class="editor-col-header">
+                            <p>Services</p>
+                        </div>
+                        <div class="editor-col-list">
+                            <div class="container-content">
+                                <div class="add-new-form">
+                                    <form method="post" class="form vertical" action="/new-template/{{idProject}}">
+                                        <label class="form-entry-add">
+                                            <input type="text" name="name" placeholder="Give a name" required>
+                                        </label>
+                                        <button class="btn-add" type="submit">New Template</button>
+                                    </form>
+                                </div>
+                                <div class="container-content">
+                                    <div class="items-list">
+                                        {{#services}}
+                                        <a class="container-content-items" href="/template/{{id}}">{{name}}</a>
+                                        {{/services}}
+                                    </div>
+                                </div>
+
+<!--                                <div class="item-list">-->
+<!--                                    {{#services}}-->
+<!--                                    <a class="container-content-items" href="/service/{{id}}">{{name}}</a>-->
+<!--                                    {{/services}}-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-col" id="text-area">
+                        <div class="editor-col-header">
+                            <p>Properties</p>
+                        </div>
+                        <div >
+                            <div >
+                                <div>
+                                    <textarea>properties here</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/network}}
+
+    <div class="footer">
+        <h2>Include &copy; 2020</h2>
+    </div>
+</div>
+
+</body>
+</html>

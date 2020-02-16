@@ -9,7 +9,6 @@ public class TemporalUserInformation {
 
     private Map<Long, Project> projects = new HashMap<>();
     private Map<Long, Template> templates = new HashMap<>();
-
     private Map<Long, Network> network = new HashMap<>();
     private Map<Long, Service> services = new HashMap<>();
     private Map<Long, Volume> volumes = new HashMap<>();

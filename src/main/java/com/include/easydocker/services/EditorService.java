@@ -21,7 +21,7 @@ public class EditorService {
     }
 
     public void createService(long idTemplate, Service service) {
-
+        service.setId(System.currentTimeMillis());
         if (usersSession.isLogged()) {
             service.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
             repositoryManager.getServiceRepository().save(service);
@@ -30,11 +30,10 @@ public class EditorService {
             service.setTemplate(usersSession.getTemplate(idTemplate));
             usersSession.addService(service);
         }
-
     }
 
     public void createNetwork(long idTemplate, Network network) {
-
+        network.setId(System.currentTimeMillis());
         if (usersSession.isLogged()){
             network.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
             repositoryManager.getNetworkRepository().save(network);
@@ -43,11 +42,10 @@ public class EditorService {
             network.setTemplate(usersSession.getTemplate(idTemplate));
             usersSession.addNetwork(network);
         }
-
     }
 
     public void createVolume(long idTemplate, Volume volume) {
-
+        volume.setId(System.currentTimeMillis());
         if (usersSession.isLogged()) {
             volume.setTemplate(repositoryManager
                     .getTemplateRepository().findById(idTemplate));
@@ -57,7 +55,16 @@ public class EditorService {
             volume.setTemplate(usersSession.getTemplate(idTemplate));
             usersSession.addVolume(volume);
         }
-
     }
 
+    public UsersSession getUsersSession() {
+        return usersSession;
+    }
+
+    public Network networkProperties(long idNetwork) {
+        if (usersSession.isLogged())
+            return repositoryManager.getNetworkRepository().findById(idNetwork);
+        else
+            return usersSession.getNetwork(idNetwork);
+    }
 }
