@@ -77,4 +77,27 @@ public class UsersSession {
 
         return template;
     }
+
+    public void deleteProject(long id) {
+        this.getTemporalUserInformation().getProjects().remove(id);
+    }
+
+    public void deleteTemplate(long id) {
+        this.getTemporalUserInformation().getTemplates().remove(id);
+    }
+
+    public void deleteVolume(long id){
+        this.getTemporalUserInformation().getVolumes().remove(id);
+    }
+
+    public void deleteServices(long id){
+        this.getTemporalUserInformation().getServices().remove(id);
+    }
+
+    public void deleteNetwork(long id){
+        this.getTemporalUserInformation().getNetwork().remove(id);
+    }
+
+
+
 }

@@ -24,6 +24,7 @@ public class AppService {
 
     public void createProject(Project project){
         project.setUser(usersSession.getUser());
+
         if (usersSession.isLogged())
             repositoryManager.getProjectRepository().save(project);
         else
@@ -45,6 +46,7 @@ public class AppService {
     }
 
     public List<Project> userOverview() {
+
         if (usersSession.isLogged())
             return repositoryManager
                     .getProjectRepository()
@@ -53,6 +55,7 @@ public class AppService {
             return new LinkedList<>(usersSession
                     .getTemporalUserInformation()
                     .getProjects().values());
+
     }
 
     public Project projectOverview(long idProject) {
@@ -71,5 +74,19 @@ public class AppService {
 
     public UsersSession getUsersSession() {
         return usersSession;
+    }
+
+    public void deleteProject(long idProject) {
+        if(usersSession.isLogged())
+            repositoryManager.getProjectRepository().deleteById(idProject);
+        else
+            usersSession.deleteProject(idProject);
+    }
+
+    public void deleteTemplate(long idTemplate) {
+        if(usersSession.isLogged())
+            repositoryManager.getTemplateRepository().deleteById(idTemplate);
+        else
+            usersSession.deleteTemplate(idTemplate);
     }
 }

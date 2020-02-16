@@ -27,6 +27,7 @@ public class EditorService {
             repositoryManager.getServiceRepository().save(service);
         }
         else {
+            service.setId(System.currentTimeMillis());
             service.setTemplate(usersSession.getTemplate(idTemplate));
             usersSession.addService(service);
         }
@@ -40,6 +41,7 @@ public class EditorService {
             repositoryManager.getNetworkRepository().save(network);
         }
         else {
+            network.setId(System.currentTimeMillis());
             network.setTemplate(usersSession.getTemplate(idTemplate));
             usersSession.addNetwork(network);
         }
@@ -54,10 +56,32 @@ public class EditorService {
             repositoryManager.getVolumesRepository().save(volume);
         }
         else {
+            volume.setId(System.currentTimeMillis());
             volume.setTemplate(usersSession.getTemplate(idTemplate));
             usersSession.addVolume(volume);
         }
 
     }
 
+    public void deleteNetwork(long id) {
+        if(usersSession.isLogged())
+            repositoryManager.getNetworkRepository().deleteById(id);
+        else
+            usersSession.deleteNetwork(id);
+
+    }
+
+    public void deleteVolume(long id) {
+        if(usersSession.isLogged())
+            repositoryManager.getVolumesRepository().deleteById(id);
+        else
+            usersSession.deleteVolume(id);
+    }
+
+    public void deleteService(long id) {
+        if(usersSession.isLogged())
+            repositoryManager.getServiceRepository().deleteById(id);
+        else
+            usersSession.deleteServices(id);
+    }
 }

@@ -53,11 +53,13 @@
         <div class="container-content">
             <div class="items-list">
                 {{#projects}}
-                <a class="container-content-items"  href="/project/{{id}}">{{name}}</a>
+                <div class="container-content-items" >
+                    <a href="/project/{{id}}">{{name}}</a>
+                    <a href="/delete-project/{{id}}">Borrar</a>
+                </div>
                 {{/projects}}
             </div>
         </div>
-
     </div>
     {{/user}}
 
@@ -80,7 +82,10 @@
         <div class="container-content">
             <div class="items-list">
                 {{#templates}}
-                <a class="container-content-items" href="/template/{{id}}">{{name}}</a>
+                <div class="container-content-items">
+                    <a href="/template/{{id}}">{{name}}</a>
+                    <a href="/delete-template/{{id}}/{{idProject}}">Borrar</a>
+                </div>
                 {{/templates}}
             </div>
         </div>
@@ -101,7 +106,7 @@
                         <div class="editor-col-header">
                             <p>Services</p>
                             <div>
-                                <form method="post" class="form vertical" action="">
+                                <form method="post" class="form vertical" action="/new-service/{{idTemplate}}">
                                     <label class="form-entry-add">
                                         <input type="text" name="name" placeholder="Give a name" required>
                                     </label>
@@ -110,14 +115,23 @@
                             </div>
                         </div>
                         <div class="editor-col-list">
-
+                            <div class="container-content">
+                                <div class="items-list">
+                                    {{#services}}
+                                    <div class="container-content-items">
+                                        <a href="/service/{{id}}">{{name}}</a>
+                                        <a href="/delete-from/{{idTemplate}}/service/{{id}}/">Borrar</a>
+                                    </div>
+                                    {{/services}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="editor-col" id="networks">
                         <div class="editor-col-header">
                             <p>Networks</p>
                             <div>
-                                <form method="post" class="form vertical" action="">
+                                <form method="post" class="form vertical" action="/new-network/{{idTemplate}}">
                                     <label class="form-entry-add">
                                         <input type="text" name="name" placeholder="Give a name" required>
                                     </label>
@@ -128,7 +142,12 @@
                         <div class="editor-col-list">
                             <div class="container-content">
                                 <div class="items-list">
-                                    <a class="container-content-items" href="">Ejemplo</a>
+                                    {{#networks}}
+                                    <div class="container-content-items">
+                                        <a href="/network/{{id}}">{{name}}</a>
+                                        <a href="/delete-from/{{idTemplate}}/network/{{id}}/">Borrar</a>
+                                    </div>
+                                    {{/networks}}
                                 </div>
                             </div>
                         </div>
@@ -137,7 +156,7 @@
                         <div class="editor-col-header">
                             <p>Volumes</p>
                             <div>
-                                <form method="post" class="form vertical" action="">
+                                <form method="post" class="form vertical" action="/new-volume/{{idTemplate}}">
                                     <label class="form-entry-add">
                                         <input type="text" name="name" placeholder="Give a name" required>
                                     </label>
@@ -148,7 +167,12 @@
                         <div class="editor-col-list">
                             <div class="container-content">
                                 <div class="items-list">
-                                    <a class="container-content-items" href="">Ejemplo</a>
+                                    {{#volumes}}
+                                    <div class="container-content-items">
+                                        <a href="/volume/{{id}}">{{name}}</a>
+                                        <a href="/delete-from/{{idTemplate}}/volume/{{id}}/">Borrar</a>
+                                    </div>
+                                    {{/volumes}}
                                 </div>
                             </div>
                         </div>
