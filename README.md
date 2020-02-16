@@ -1,13 +1,15 @@
 # EasyDocker
 ### Temática de la web: 
 Ofrecer una capa de abstracción en la creación de arquitectura de microservicios con docker.
-Los usuarios registrados podrán crear y guardar arquitecturas y compartirlas medainte la creación de equipos.
+Los usuarios registrados podrán crear y guardar arquitecturas.
 
 ### Nombre y descripción de las entidades principales
 - User: usuarios registrados en la aplicación  
-- Team: agrupaciones de usuarios que comparten proyectos  
-- Temaplate: estructura de los dockers y sus interacciones (conexiones, seguridad...)
-- Proyect: conjunto de tempaltes de un mismo Team o User
+- Template: estructura de los dockers y sus interacciones (conexiones, seguridad...)
+- Proyect: conjunto de templates de un mismo Team o User
+- Service: conjunto de dockers con sus propiedades
+- Network: conjunto de networks dentro de un Service con sus propiedades
+- Volumes: conjunto de volumes dentro de un Service con sus propiedades
 
 ### Descripción de las funcionalidades del servicio interno
 Se va a encargar de generar y construir los dockerfile y docker-compose mediante las especificaciones del user a través de la interfaz.
