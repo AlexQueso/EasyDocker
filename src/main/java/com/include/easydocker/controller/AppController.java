@@ -35,6 +35,18 @@ public class AppController {
         return Utils.redirectTo("/project/" + idProject);
     }
 
+    @GetMapping("/delete-project/{idProject}")
+    public String deleteProject(@PathVariable long idProject) {
+        appService.deleteProject(idProject);
+        return Utils.redirectTo("/user-overview");
+    }
+
+    @GetMapping("/delete-template/{idTemplate}/{idProject}")
+    public String deleteTemplate(@PathVariable long idTemplate, @PathVariable long idProject) {
+        appService.deleteTemplate(idTemplate);
+        return Utils.redirectTo("/project/" + idProject);
+    }
+
     @GetMapping("/log-out")
     public String logOut(HttpSession session) {
         session.invalidate();

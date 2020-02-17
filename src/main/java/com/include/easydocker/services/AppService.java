@@ -72,4 +72,18 @@ public class AppService {
     public UsersSession getUsersSession() {
         return usersSession;
     }
+
+    public void deleteProject(long idProject) {
+        if(usersSession.isLogged())
+            repositoryManager.getProjectRepository().deleteById(idProject);
+        else
+            usersSession.deleteProject(idProject);
+    }
+
+    public void deleteTemplate(long idTemplate) {
+        if(usersSession.isLogged())
+            repositoryManager.getTemplateRepository().deleteById(idTemplate);
+        else
+            usersSession.deleteTemplate(idTemplate);
+    }
 }

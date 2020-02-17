@@ -211,26 +211,18 @@ a {
     overflow: auto
 }
 
-
 .container-content-items {
     height: 50px;
     width: 90%;
 
-    font-family: var(--fontTitles);
-    margin: 20px auto 0 auto;
-    size: 16px;
-
-    padding-left: 20px;
     border-radius: 8px;
 
+    margin: 10px auto;
+
     display: flex;
+    justify-content: space-between;
     align-items: center;
-
-    cursor: pointer;
-
-    text-decoration: none;
     background-color: white;
-    color: var(--colorPrimaryDark);
 }
 
 .container-content-items:hover {
@@ -238,6 +230,22 @@ a {
     border-bottom: 2px solid var(--colorPrimary);
     color: white;
 }
+
+.container-content-items:hover a{
+    color: white;
+}
+
+.container-content-items a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--colorPrimaryDark);
+
+    font-family: var(--fontTitles);
+    size: 16px;
+
+    padding: 0 20px;
+}
+
 
 
 /*===================================================================================================================*/
