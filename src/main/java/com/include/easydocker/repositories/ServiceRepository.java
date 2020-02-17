@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface ServiceRepository extends JpaRepository<Service, Long> {
 
-    List<Service> findByNetwork(Network network);
+//    List<Service> findByNetworks(Network network);
+//
+//    List<Service> findByVolumes(Volume volume);
 
-    List<Service> findByVolume(Volume volume);
+    Service findByName(String name);
 }

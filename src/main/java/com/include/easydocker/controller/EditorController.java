@@ -46,13 +46,44 @@ public class EditorController {
 
         Network n = editorService.networkProperties(id);
 
-//        model.addAttribute("idNetwork", n.getId());
         model.addAttribute("idTemplate", n.getTemplate().getId());
+        model.addAttribute("idNetwork", n.getId());
         model.addAttribute("nameNetwork", n.getName());
         model.addAttribute("network", true);
-        model.addAttribute("services", n.getTemplate().getServices());
+        model.addAttribute("services", n.getServices());
 
         return "editor";
+    }
+
+    @GetMapping("/volume/{id}")
+    public String volumeProperties(@PathVariable long id, Model model) {
+        showLoggedInfoOrTemporal(model);
+
+        Volume v = editorService.volumeProperties(id);
+
+        model.addAttribute("idTemplate", v.getTemplate().getId());
+        model.addAttribute("idVolume", v.getId());
+        model.addAttribute("nameVolume", v.getName());
+        model.addAttribute("volume", true);
+        model.addAttribute("services", v.getServices());
+
+        return "editor";
+    }
+
+    @PostMapping(value = "/add-service-to-network/{id}")
+    public String addServiceToNetwork(@PathVariable long id, String name){
+        Service s = editorService.getService(name);
+        if (s != null)
+            editorService.addServiceToNetwork(s, id);
+        return Utils.redirectTo("/network/" + id);
+    }
+
+    @PostMapping(value = "/add-service-to-volume/{id}")
+    public String addServiceToVolume(@PathVariable long id, String name){
+        Service s = editorService.getService(name);
+        if (s != null)
+            editorService.addServiceToVolume(s, id);
+        return Utils.redirectTo("/volume/" + id);
     }
 
     private void showLoggedInfoOrTemporal(Model model) {
