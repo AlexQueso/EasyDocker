@@ -47,45 +47,39 @@
         <div class="container-content">
             <div class="editor">
                 <div class="editor-columns">
-                    <div class="editor-col" id="services">
+                    <div class="editor-col">
                         <div class="editor-col-header">
                             <p>Services</p>
                         </div>
                         <div class="editor-col-list">
-                            <div class="container-content">
-                                <div class="add-new-form">
-                                    <form method="post" class="form vertical" action="/new-template/{{idProject}}">
+                            <div>
+                                <div><!--<div class="add-new-form">-->
+                                    <form method="post" class="form vertical" action="/add-service-to-network/{{idNetwork}}">
                                         <label class="form-entry-add">
                                             <input type="text" name="name" placeholder="Give a name" required>
                                         </label>
-                                        <button class="btn-add" type="submit">New Template</button>
+                                        <button class="btn-add" type="submit">Add Service</button>
                                     </form>
                                 </div>
-                                <div class="container-content">
+                                <div><!--<div class="container-content">-->
                                     <div class="items-list">
                                         {{#services}}
                                         <a class="container-content-items" href="/template/{{id}}">{{name}}</a>
                                         {{/services}}
                                     </div>
                                 </div>
-
-<!--                                <div class="item-list">-->
-<!--                                    {{#services}}-->
-<!--                                    <a class="container-content-items" href="/service/{{id}}">{{name}}</a>-->
-<!--                                    {{/services}}-->
-<!--                                </div>-->
                             </div>
                         </div>
                     </div>
 
-                    <div class="editor-col" id="text-area">
+                    <div class="editor-col">
                         <div class="editor-col-header">
                             <p>Properties</p>
                         </div>
                         <div >
                             <div >
                                 <div>
-                                    <textarea>properties here</textarea>
+                                    <textarea  rows=5 cols=40>properties here</textarea>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +89,67 @@
         </div>
     </div>
     {{/network}}
+
+    {{#volume}}
+    <div class="container-item">
+        <div class="container-item-header">
+            <div class="container-item-header-title">
+                <h2>Volume: {{nameVolume}}</h2>
+            </div>
+            <div class="container-item-header-button">
+                <a href="/template/{{idTemplate}}">Back</a>
+            </div>
+        </div>
+
+        <div class="container-content">
+            <div class="editor">
+                <div class="editor-columns">
+                    <div class="editor-col">
+                        <div class="editor-col-header">
+                            <p>Services</p>
+                        </div>
+                        <div class="editor-col-list">
+                            <div>
+                                <div>
+                                    <form method="post" class="form vertical" action="/add-service-to-volume/{{idVolume}}">
+                                        <label class="form-entry-add">
+                                            <input type="text" name="name" placeholder="Give a name" required>
+                                        </label>
+                                        <button class="btn-add" type="submit">Add Service</button>
+                                    </form>
+                                </div>
+                                <div>
+                                    <div class="items-list">
+                                        {{#services}}
+                                        <a class="container-content-items" href="/template/{{id}}">{{name}}</a>
+                                        {{/services}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-col">
+                        <div class="editor-col-header">
+                            <p>Properties</p>
+                        </div>
+                        <div >
+                            <div >
+                                <div>
+                                    <textarea  rows=5 cols=40>properties here</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/volume}}
+
+    {{#service}}
+    {{/service}}
 
     <div class="footer">
         <h2>Include &copy; 2020</h2>

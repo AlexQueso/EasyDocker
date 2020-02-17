@@ -82,4 +82,16 @@ public class UsersSession {
     public Network getNetwork(long id) {
         return temporalUserInformation.getNetwork().get(id);
     }
+
+    public Volume getVolume(long id){
+        return temporalUserInformation.getVolumes().get(id);
+    }
+
+    public Service getService(String name) {
+        for(Service s: temporalUserInformation.getServices().values()){
+            if (s.getName().equals(name))
+                return s;
+        }
+        return null;
+    }
 }

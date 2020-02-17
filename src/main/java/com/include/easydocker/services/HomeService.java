@@ -1,8 +1,6 @@
 package com.include.easydocker.services;
 
-import com.include.easydocker.classes.Project;
-import com.include.easydocker.classes.Template;
-import com.include.easydocker.classes.User;
+import com.include.easydocker.classes.*;
 import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.session.UsersSession;
 import com.include.easydocker.utils.Utils;
@@ -35,6 +33,18 @@ public class HomeService {
         Template template = new Template("template example");
         template.setProject(project);
         repositoryManager.getTemplateRepository().save(template);
+
+        Service service = new Service("service example");
+        service.setTemplate(template);
+        repositoryManager.getServiceRepository().save(service);
+
+        Network network = new Network("network example");
+        network.setTemplate(template);
+        repositoryManager.getNetworkRepository().save(network);
+
+        Volume volume = new Volume("volume example");
+        volume.setTemplate(template);
+        repositoryManager.getVolumesRepository().save(volume);
     }
     
     public boolean signedInSuccessfully(String user, String password) {

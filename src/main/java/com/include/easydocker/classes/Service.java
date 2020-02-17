@@ -15,10 +15,10 @@ public class Service {
     @ManyToOne
     private Template template;
 
-    @ManyToMany(mappedBy = "service")
+    @ManyToMany
     private List<Network> networks;
 
-    @ManyToMany(mappedBy = "service")
+    @ManyToMany
     private List<Volume> volumes;
 
     public Service() {
