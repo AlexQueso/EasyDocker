@@ -86,6 +86,21 @@ public class EditorController {
         return Utils.redirectTo("/volume/" + id);
     }
 
+    @GetMapping("/delete-from/{idTemplate}/{eliminate}/{id}")
+    public String deleteFromTemplate(@PathVariable long id, @PathVariable long idTemplate,
+                                     @PathVariable String eliminate) {
+        switch (eliminate) {
+            case "network": editorService.deleteNetwork(id);
+                break;
+            case "volume": editorService.deleteVolume(id);
+                break;
+            case "service": editorService.deleteService(id);
+                break;
+        }
+
+        return Utils.redirectTo("/template/"+ idTemplate);
+    }
+
     private void showLoggedInfoOrTemporal(Model model) {
         if(editorService.getUsersSession().isLogged())
             model.addAttribute("user-logged", true);
