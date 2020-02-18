@@ -2,6 +2,7 @@ package com.include.easydocker.classes;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Service {
@@ -66,6 +67,19 @@ public class Service {
 
     public void setVolumes(List<Volume> volumes) {
         this.volumes = volumes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Service service = (Service) o;
+        return id == service.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
 

@@ -2,6 +2,7 @@ package com.include.easydocker.classes;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Network {
@@ -54,5 +55,18 @@ public class Network {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Network network = (Network) o;
+        return id.equals(network.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
