@@ -21,9 +21,9 @@ public class HomeService {
         this.usersSession = usersSession;
     }
 
+    ///*
     @PostConstruct
     public void init() {
-        /*USERS*/
         User sa = new User("sa", Utils.hash("sa"));
         repositoryManager.getUserRepository().save(sa);
         User user1 = new User("user1", Utils.hash("1234"));
@@ -35,7 +35,6 @@ public class HomeService {
         User user4 = new User("DavidCorreas", Utils.hash("david"));
         repositoryManager.getUserRepository().save(user4);
 
-        /*PROJECTS*/
         Project project1 = new Project("project example");
         project1.setUser(user1);
         repositoryManager.getProjectRepository().save(project1);
@@ -52,7 +51,6 @@ public class HomeService {
         project5.setUser(user4);
         repositoryManager.getProjectRepository().save(project5);
 
-        /*TEMPLATES*/
         Template template1 = new Template("template example");
         template1.setProject(project1);
         repositoryManager.getTemplateRepository().save(template1);
@@ -69,7 +67,6 @@ public class HomeService {
         template5.setProject(project5);
         repositoryManager.getTemplateRepository().save(template5);
 
-        /*SERVICES*/
         Service service1 = new Service("service example");
         service1.setTemplate(template1);
         repositoryManager.getServiceRepository().save(service1);
@@ -86,7 +83,6 @@ public class HomeService {
         service5.setTemplate(template5);
         repositoryManager.getServiceRepository().save(service5);
 
-        /*NETWORKS*/
         Network network1 = new Network("network example");
         network1.setTemplate(template1);
         repositoryManager.getNetworkRepository().save(network1);
@@ -103,7 +99,6 @@ public class HomeService {
         network5.setTemplate(template5);
         repositoryManager.getNetworkRepository().save(network5);
 
-        /*VOLUMES*/
         Volume volume1 = new Volume("volume example");
         volume1.setTemplate(template1);
         repositoryManager.getVolumesRepository().save(volume1);
@@ -114,6 +109,7 @@ public class HomeService {
         volume3.setTemplate(template3);
         repositoryManager.getVolumesRepository().save(volume3);
     }
+    //*/
     
     public boolean signedInSuccessfully(String user, String password) {
         User welcomeUser = checkUser(user, Utils.hash(password));

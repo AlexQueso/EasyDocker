@@ -12,6 +12,7 @@ public class Network {
     private Long id;
 
     private String name;
+    private String properties;
 
     @ManyToOne
     private Template template;
@@ -55,6 +56,14 @@ public class Network {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    public String getProperties() {
+        return properties;
+    }
+
+    public void setProperties(String properties) {
+        this.properties = properties;
     }
 
     @Override

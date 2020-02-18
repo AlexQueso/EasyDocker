@@ -87,6 +87,10 @@ public class UsersSession {
         return temporalUserInformation.getVolumes().get(id);
     }
 
+    public Service getService(long id) {
+        return temporalUserInformation.getServices().get(id);
+    }
+
     public Service getService(String name) {
         for(Service s: temporalUserInformation.getServices().values()){
             if (s.getName().equals(name))
@@ -130,7 +134,5 @@ public class UsersSession {
     public void deleteNetwork(long id){
         this.getTemporalUserInformation().getNetwork().remove(id);
     }
-
-
 
 }

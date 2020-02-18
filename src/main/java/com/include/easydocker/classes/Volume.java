@@ -12,6 +12,7 @@ public class Volume {
     private long id;
 
     private String name;
+    private String properties;
 
     @ManyToOne
     private Template template;
@@ -56,6 +57,14 @@ public class Volume {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    public String getProperties() {
+        return properties;
+    }
+
+    public void setProperties(String properties) {
+        this.properties = properties;
     }
 
     @Override

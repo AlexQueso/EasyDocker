@@ -82,6 +82,11 @@ public class EditorService {
             return usersSession.getVolume(idVolume);
     }
 
+    public Service serviceProperties(long id) throws DavidHasntImplementedException {
+        //todo: david venga date
+        throw new DavidHasntImplementedException();
+    }
+
     public Service getService(String name){
         if (usersSession.isLogged())
             return repositoryManager.getServiceRepository().findByName(name);
@@ -136,5 +141,41 @@ public class EditorService {
             repositoryManager.getServiceRepository().deleteById(id);
         else
             usersSession.deleteServices(id);
+    }
+
+    public void savePropertiesNetwork(long id, String properties) {
+        if (usersSession.isLogged()){
+            Network n = repositoryManager.getNetworkRepository().findById(id);
+            n.setProperties(properties);
+            repositoryManager.getNetworkRepository().save(n);
+        }
+        else
+            usersSession.getNetwork(id).setProperties(properties);
+    }
+
+    public void savePropertiesVolume(long id, String properties) {
+        if (usersSession.isLogged()){
+            Volume v = repositoryManager.getVolumesRepository().findById(id);
+            v.setProperties(properties);
+            repositoryManager.getVolumesRepository().save(v);
+        }
+        else
+            usersSession.getVolume(id).setProperties(properties);
+    }
+
+    public void savePropertiesService(long id, String properties) {
+        if (usersSession.isLogged()){
+            Service s = repositoryManager.getServiceRepository().findById(id);
+            s.setProperties(properties);
+            repositoryManager.getServiceRepository().save(s);
+        }
+        else
+            usersSession.getService(id).setProperties(properties);
+    }
+
+    private class DavidHasntImplementedException extends Exception {
+        public DavidHasntImplementedException() {
+            super("David date");
+        }
     }
 }
