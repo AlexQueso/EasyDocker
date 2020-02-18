@@ -36,7 +36,7 @@ public class EditorService {
     }
 
     public void createNetwork(long idTemplate, Network network) {
-        if (getNetwork(network.getName())== null) {
+        if (getNetwork(network.getName()) == null) {
             if (usersSession.isLogged()) {
                 network.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
                 repositoryManager.getNetworkRepository().save(network);
@@ -82,9 +82,11 @@ public class EditorService {
             return usersSession.getVolume(idVolume);
     }
 
-    public Service serviceProperties(long id) throws DavidHasntImplementedException {
-        //todo: david venga date
-        throw new DavidHasntImplementedException();
+    public Service serviceProperties(long id) {
+        if (usersSession.isLogged())
+            return repositoryManager.getServiceRepository().findById(id);
+        else
+            return usersSession.getService(id);
     }
 
     public Service getService(String name){
@@ -171,11 +173,5 @@ public class EditorService {
         }
         else
             usersSession.getService(id).setProperties(properties);
-    }
-
-    private class DavidHasntImplementedException extends Exception {
-        public DavidHasntImplementedException() {
-            super("David date");
-        }
     }
 }

@@ -73,7 +73,7 @@ public class EditorController {
     }
 
     @GetMapping("/service/{id}")
-    public String serviceProperties(@PathVariable long id, Model model) throws Exception {
+    public String serviceProperties(@PathVariable long id, Model model) {
         showLoggedInfoOrTemporal(model);
 
         Service s = editorService.serviceProperties(id);
@@ -139,5 +139,17 @@ public class EditorController {
 
         model.addAttribute("username", editorService.getUsersSession()
                 .getUser().getName());
+    }
+
+    @PostMapping(value = "/pull-from-hub/{id}")
+    public String addDockerToService(@PathVariable long id, String dockerName){
+        // TODO David: anadir imagen a las properties
+        throw new RuntimeException("Not implemented yet");
+    }
+
+    @PostMapping(value = "/build-dockerfile/{id}")
+    public String buildDockerFileAndPush(@PathVariable long id, String dockerfile){
+        // TODO David: anadir imagen a las properties
+        throw new RuntimeException("Not implemented yet");
     }
 }
