@@ -54,7 +54,7 @@
                         <div class="editor-col-list">
                             <div>
                                 <div><!--<div class="add-new-form">-->
-                                    <form method="post" class="form vertical" action="/add-service-to-network/{{idNetwork}}">
+                                    <form method="post" class="form" action="/add-service-to-network/{{idNetwork}}">
                                         <label class="form-entry-add">
                                             <input type="text" name="name" placeholder="Give a name" required>
                                         </label>
@@ -79,8 +79,12 @@
                         <div >
                             <div >
                                 <div>
-                                    <!-- Todo boton de guardar properties -->
-                                    <textarea  rows=5 cols=40>properties here</textarea>
+                                    <form method="post" class="form" action="/save-properties/{{idNetwork}}/network">
+                                        <label class="form-entry-add">
+                                            <textarea name="properties" rows=5 cols=40></textarea>
+                                        </label>
+                                        <button class="btn-add" type="submit">Add Service</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -138,8 +142,12 @@
                         <div >
                             <div >
                                 <div>
-                                    <!-- Todo boton de guardar properties -->
-                                    <textarea  rows=5 cols=40>properties here</textarea>
+                                    <form method="post" class="form" action="/save-properties/{{idVolume}}/volume">
+                                        <label class="form-entry-add">
+                                            <textarea name="properties" rows=5 cols=40></textarea>
+                                        </label>
+                                        <button class="btn-add" type="submit">Add Service</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -151,8 +159,74 @@
     {{/volume}}
 
     {{#service}}
-    <p>services page</p>
-    <!-- todo: David-->
+    <div class="container-item">
+        <div class="container-item-header">
+            <div class="container-item-header-title">
+                <h2>Service: {{nameService}}</h2>
+            </div>
+            <div class="container-item-header-button">
+                <a href="/template/{{idTemplate}}">Back</a>
+            </div>
+        </div>
+
+        <div class="container-content">
+            <div class="editor">
+                <div class="editor-columns">
+                    <div class="editor-col">
+                        <div class="editor-col-header">
+                            <p>Docker</p>
+                        </div>
+                        <div class="editor-col-list">
+                            <div>
+                                <div>
+                                    <!--TODO: action="/pull-from-hub/{{idService}}"-->
+                                    <form method="post" class="form vertical" action="">
+                                        <label class="form-entry-add">
+                                            <input type="text" name="name" placeholder="Docker image" required>
+                                        </label>
+                                        <button class="btn-add" type="submit">Get image</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="editor-col-list">
+                            <div>
+                                <div>
+                                    <!--TODO: action="/build-dockerfile/{{idService}}"-->
+                                    <form method="post" class="form vertical" action="">
+                                        <label class="form-entry-add">
+                                            <input type="text" name="tag" placeholder="Tag Docker" required>
+                                        </label>
+                                        <label class="form-entry-add">
+                                            <textarea name="dockerfile" rows=5 cols=40></textarea>
+                                        </label>
+                                        <button class="btn-add" type="submit">Build and Push</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="editor-col">
+                        <div class="editor-col-header">
+                            <p>Properties</p>
+                        </div>
+                        <div >
+                            <div >
+                                <div>
+                                    <form method="post" class="form" action="/save-properties/{{idService}}/service">
+                                        <label class="form-entry-add">
+                                            <textarea name="properties" rows=5 cols=40></textarea>
+                                        </label>
+                                        <button class="btn-add" type="submit">Add Service</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{/service}}
 
     <div class="footer">
