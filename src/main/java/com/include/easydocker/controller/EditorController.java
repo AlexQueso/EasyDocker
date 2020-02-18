@@ -51,6 +51,7 @@ public class EditorController {
         model.addAttribute("nameNetwork", n.getName());
         model.addAttribute("network", true);
         model.addAttribute("services", n.getServices());
+        model.addAttribute("properties", n.getProperties());
 
         return "editor";
     }
@@ -66,6 +67,22 @@ public class EditorController {
         model.addAttribute("nameVolume", v.getName());
         model.addAttribute("volume", true);
         model.addAttribute("services", v.getServices());
+        model.addAttribute("properties", v.getProperties());
+
+        return "editor";
+    }
+
+    @GetMapping("/service/{id}")
+    public String serviceProperties(@PathVariable long id, Model model) throws Exception {
+        showLoggedInfoOrTemporal(model);
+
+        Service s = editorService.serviceProperties(id);
+
+        model.addAttribute("idTemplate", s.getTemplate().getId());
+        model.addAttribute("idService", s.getId());
+        model.addAttribute("nameService", s.getName());
+        model.addAttribute("service", true);
+        model.addAttribute("properties", s.getProperties());
 
         return "editor";
     }
@@ -99,6 +116,19 @@ public class EditorController {
         }
 
         return Utils.redirectTo("/template/"+ idTemplate);
+    }
+
+    @PostMapping(value = "/save-properties/{id}/{added}")
+    public String savePorperties(@PathVariable long id, @PathVariable String added, String properties){
+        switch (added) {
+            case "network": editorService.savePropertiesNetwork(id, properties);
+                break;
+            case "volume": editorService.savePropertiesVolume(id, properties);
+                break;
+            case "service": editorService.savePropertiesService(id, properties);
+                break;
+        }
+        return Utils.redirectTo("/" + added + "/" + id);
     }
 
     private void showLoggedInfoOrTemporal(Model model) {
