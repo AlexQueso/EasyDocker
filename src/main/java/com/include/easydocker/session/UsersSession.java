@@ -95,6 +95,22 @@ public class UsersSession {
         return null;
     }
 
+    public Network getNetwork(String name) {
+        for(Network n: temporalUserInformation.getNetwork().values()){
+            if (n.getName().equals(name))
+                return n;
+        }
+        return null;
+    }
+
+    public Volume getVolume(String name) {
+        for(Volume v: temporalUserInformation.getVolumes().values()){
+            if (v.getName().equals(name))
+                return v;
+        }
+        return null;
+    }
+
     public void deleteProject(long id) {
         this.getTemporalUserInformation().getProjects().remove(id);
     }

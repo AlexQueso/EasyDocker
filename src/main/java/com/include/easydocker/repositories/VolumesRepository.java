@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface VolumesRepository extends JpaRepository<Volume, Long> {
 
     Volume findById(long id);
+
+    Volume findByName(String name);
 }

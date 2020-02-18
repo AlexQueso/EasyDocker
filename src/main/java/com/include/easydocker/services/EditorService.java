@@ -23,44 +23,44 @@ public class EditorService {
     }
 
     public void createService(long idTemplate, Service service) {
-        if (usersSession.isLogged()) {
-            service.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
-            repositoryManager.getServiceRepository().save(service);
-        }
-        else {
-            service.setId(System.currentTimeMillis());
-            service.setTemplate(usersSession.getTemplate(idTemplate));
-            usersSession.addService(service);
+        if (getService(service.getName()) == null) {
+            if (usersSession.isLogged()) {
+                service.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
+                repositoryManager.getServiceRepository().save(service);
+            } else {
+                service.setId(System.currentTimeMillis());
+                service.setTemplate(usersSession.getTemplate(idTemplate));
+                usersSession.addService(service);
+            }
         }
     }
 
     public void createNetwork(long idTemplate, Network network) {
-
-        network.setServices(new LinkedList<>());
-        if (usersSession.isLogged()){
-            network.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
-            repositoryManager.getNetworkRepository().save(network);
+        if (getNetwork(network.getName())== null) {
+            if (usersSession.isLogged()) {
+                network.setTemplate(repositoryManager.getTemplateRepository().findById(idTemplate));
+                repositoryManager.getNetworkRepository().save(network);
+            } else {
+                network.setServices(new LinkedList<>());
+                network.setId(System.currentTimeMillis());
+                network.setTemplate(usersSession.getTemplate(idTemplate));
+                usersSession.addNetwork(network);
+            }
         }
-        else {
-            network.setId(System.currentTimeMillis());
-            network.setTemplate(usersSession.getTemplate(idTemplate));
-            usersSession.addNetwork(network);
-        }
-
     }
 
     public void createVolume(long idTemplate, Volume volume) {
-
-        volume.setServices(new LinkedList<>());
-        if (usersSession.isLogged()) {
-            volume.setTemplate(repositoryManager
-                    .getTemplateRepository().findById(idTemplate));
-            repositoryManager.getVolumesRepository().save(volume);
-        }
-        else {
-            volume.setId(System.currentTimeMillis());
-            volume.setTemplate(usersSession.getTemplate(idTemplate));
-            usersSession.addVolume(volume);
+        if (getVolume(volume.getName()) == null) {
+            if (usersSession.isLogged()) {
+                volume.setTemplate(repositoryManager
+                        .getTemplateRepository().findById(idTemplate));
+                repositoryManager.getVolumesRepository().save(volume);
+            } else {
+                volume.setServices(new LinkedList<>());
+                volume.setId(System.currentTimeMillis());
+                volume.setTemplate(usersSession.getTemplate(idTemplate));
+                usersSession.addVolume(volume);
+            }
         }
     }
 
@@ -89,6 +89,20 @@ public class EditorService {
             return usersSession.getService(name);
     }
 
+    public Network getNetwork(String name){
+        if (usersSession.isLogged())
+            return repositoryManager.getNetworkRepository().findByName(name);
+        else
+            return usersSession.getNetwork(name);
+    }
+
+    public Volume getVolume(String name){
+        if (usersSession.isLogged())
+            return repositoryManager.getVolumesRepository().findByName(name);
+        else
+            return usersSession.getVolume(name);
+    }
+
     public void addServiceToNetwork(Service s, long id) {
         Network n = networkProperties(id);
         n.getServices().add(s);
@@ -102,12 +116,12 @@ public class EditorService {
         if (usersSession.isLogged())
             repositoryManager.getVolumesRepository().save(v);
     }
+
     public void deleteNetwork(long id) {
         if(usersSession.isLogged())
             repositoryManager.getNetworkRepository().deleteById(id);
         else
             usersSession.deleteNetwork(id);
-
     }
 
     public void deleteVolume(long id) {
