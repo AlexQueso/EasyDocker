@@ -22,7 +22,7 @@ docker. Los **usuarios registrados** podrán crear y guardar arquitecturas.
 ![alt text](/src/main/resources/static/PNG/paginaDeVolume.PNG "Página de Volume")
 
 ## Diagrama de navegación
-![alt text](/src/main/resources/static/PNG/DiagramaNavegacion.png "Diagrama de navegación")
+![alt text](src/main/resources/static/PNG/diagramaNavegacion.png "Diagrama de navegación")
 
 ## Modelo de datos
 #### Entidades principales
