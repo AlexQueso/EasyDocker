@@ -51,7 +51,10 @@ public class EditorController {
         model.addAttribute("nameNetwork", n.getName());
         model.addAttribute("network", true);
         model.addAttribute("services", n.getServices());
-        model.addAttribute("properties", n.getProperties());
+        if (n.getProperties() == null)
+            model.addAttribute("properties", "");
+        else
+            model.addAttribute("properties", n.getProperties());
 
         return "editor";
     }
@@ -67,7 +70,10 @@ public class EditorController {
         model.addAttribute("nameVolume", v.getName());
         model.addAttribute("volume", true);
         model.addAttribute("services", v.getServices());
-        model.addAttribute("properties", v.getProperties());
+        if (v.getProperties() == null)
+            model.addAttribute("properties", "");
+        else
+            model.addAttribute("properties", v.getProperties());
 
         return "editor";
     }
@@ -82,7 +88,10 @@ public class EditorController {
         model.addAttribute("idService", s.getId());
         model.addAttribute("nameService", s.getName());
         model.addAttribute("service", true);
-        model.addAttribute("properties", s.getProperties());
+        if (s.getProperties() == null)
+            model.addAttribute("properties", "");
+        else
+            model.addAttribute("properties", s.getProperties());
 
         return "editor";
     }
