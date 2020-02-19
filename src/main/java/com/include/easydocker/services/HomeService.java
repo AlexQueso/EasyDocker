@@ -21,7 +21,7 @@ public class HomeService {
         this.usersSession = usersSession;
     }
 
-    ///*
+    /*
     @PostConstruct
     public void init() {
         User sa = new User("sa", Utils.hash("sa"));
