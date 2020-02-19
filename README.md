@@ -15,14 +15,14 @@ docker. Los **usuarios registrados** podrán crear y guardar arquitecturas.
 #### Página de Template
 ![alt text](/src/main/resources/static/PNG/paginaDeTemplate.PNG "Página de Template")
 #### Página de Service
-![alt text](/src/main/resources/static/PNG/paginaDeTemplate.PNG "Página de Service")
+![alt text](/src/main/resources/static/PNG/paginaDeService.PNG "Página de Service")
 #### Página de Network
-![alt text](/src/main/resources/static/PNG/paginaDeTemplate.PNG "Página de Network")
+![alt text](/src/main/resources/static/PNG/paginaDeNetwork.PNG "Página de Network")
 #### Página de Volume
-![alt text](/src/main/resources/static/PNG/paginaDeTemplate.PNG "Página de Volume")
+![alt text](/src/main/resources/static/PNG/paginaDeVolume.PNG "Página de Volume")
 
 ## Diagrama de navegación
-![alt text](/src/main/resources/static/PNG/diagramaNavegacion.png "Diagrama de navegación")
+![alt text](/src/main/resources/static/PNG/DiagramaNavegacion.png "Diagrama de navegación")
 
 ## Modelo de datos
 #### Entidades principales
