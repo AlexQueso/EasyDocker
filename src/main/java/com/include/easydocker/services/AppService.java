@@ -1,7 +1,6 @@
 package com.include.easydocker.services;
 
-import com.include.easydocker.classes.Project;
-import com.include.easydocker.classes.Template;
+import com.include.easydocker.classes.*;
 import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.session.UsersSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,13 @@ public class AppService {
 
     private final RepositoriesManager repositoryManager;
     private final UsersSession usersSession;
+    private final EditorService editorService;
 
     @Autowired
-    public AppService(RepositoriesManager repositoryManager, UsersSession usersSession) {
+    public AppService(RepositoriesManager repositoryManager, UsersSession usersSession, EditorService editorService) {
         this.repositoryManager = repositoryManager;
         this.usersSession = usersSession;
+        this.editorService = editorService;
     }
 
     public void createProject(Project project){
@@ -74,15 +75,30 @@ public class AppService {
     }
 
     public void deleteProject(long idProject) {
-        if(usersSession.isLogged())
+        if(usersSession.isLogged()) {
+            Project p = repositoryManager.getProjectRepository().findById(idProject);
+            for (Template t : repositoryManager.getTemplateRepository().findByProject(p))
+                deleteTemplate(t.getId());
             repositoryManager.getProjectRepository().deleteById(idProject);
+        }
         else
             usersSession.deleteProject(idProject);
     }
 
     public void deleteTemplate(long idTemplate) {
-        if(usersSession.isLogged())
+        if(usersSession.isLogged()) {
+            Template t = repositoryManager.getTemplateRepository().findById(idTemplate);
+            for (Service s : repositoryManager.getServiceRepository().findByTemplate(t))
+                editorService.deleteService(s.getId());
+
+            for (Network n : repositoryManager.getNetworkRepository().findByTemplate(t))
+                editorService.deleteNetwork(n.getId());
+
+            for (Volume v : repositoryManager.getVolumesRepository().findByTemplate(t))
+                editorService.deleteVolume(v.getId());
+
             repositoryManager.getTemplateRepository().deleteById(idTemplate);
+        }
         else
             usersSession.deleteTemplate(idTemplate);
     }

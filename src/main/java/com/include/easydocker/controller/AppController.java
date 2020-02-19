@@ -92,8 +92,6 @@ public class AppController {
         return "app";
     }
 
-
-
     private void showLoggedInfoOrTemporal(Model model) {
         if(appService.getUsersSession().isLogged())
             model.addAttribute("user-logged", true);
