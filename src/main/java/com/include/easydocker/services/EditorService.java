@@ -139,10 +139,25 @@ public class EditorService {
     }
 
     public void deleteService(long id) {
-        if(usersSession.isLogged())
+        if(usersSession.isLogged()) {
+            Service s = repositoryManager.getServiceRepository().findById(id);
+            for (Network n: repositoryManager.getNetworkRepository().findByTemplate(s.getTemplate())){
+                n.getServices().remove(s);
+            }
+            for (Volume v: repositoryManager.getVolumesRepository().findByTemplate(s.getTemplate())){
+                v.getServices().remove(s);
+            }
             repositoryManager.getServiceRepository().deleteById(id);
-        else
+        } else {
+            Service s = usersSession.getService(id);
+            for (Network n: usersSession.getTemplate(s.getTemplate().getId()).getNetworks()){
+                n.getServices().remove(s);
+            }
+            for (Volume v: usersSession.getTemplate(s.getTemplate().getId()).getVolumes()){
+                v.getServices().remove(s);
+            }
             usersSession.deleteServices(id);
+        }
     }
 
     public void savePropertiesNetwork(long id, String properties) {
