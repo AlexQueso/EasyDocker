@@ -153,12 +153,12 @@ public class EditorController {
     @PostMapping(value = "/pull-from-hub/{id}")
     public String addDockerToService(@PathVariable long id, String dockerName){
         // TODO David: anadir imagen a las properties
-        throw new RuntimeException("Not implemented yet");
+        return Utils.redirectTo("/service/" + id);
     }
 
     @PostMapping(value = "/build-dockerfile/{id}")
     public String buildDockerFileAndPush(@PathVariable long id, String dockerfile){
         // TODO David: anadir imagen a las properties
-        throw new RuntimeException("Not implemented yet");
+        return Utils.redirectTo("/service/" + id);
     }
 }
