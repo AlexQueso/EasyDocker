@@ -46,6 +46,9 @@
                         <input type="text" class="entry-add" name="name" placeholder="Give a name" required>
                     </label>
                     <button class="btn-add" type="submit">New Project</button>
+
+                    <input type="hidden" name="_csrf" value="{{token}}">
+
                 </form>
             </div>
         </div>
@@ -77,6 +80,9 @@
                         <input type="text" name="name" placeholder="Give a name" required>
                     </label>
                     <button class="btn-add" type="submit">New Template</button>
+
+                    <input type="hidden" name="_csrf" value="{{token}}">
+
                 </form>
             </div>
         </div>
@@ -113,6 +119,9 @@
                                     <label class="form-entry-add">
                                         <input type="text" name="name" placeholder="Give a name" required>
                                     </label>
+
+                                    <input type="hidden" name="_csrf" value="{{token}}">
+
                                     <button class="btn-add" type="submit">Add Service</button>
                                 </form>
                             </div>
@@ -138,6 +147,9 @@
                                     <label class="form-entry-add">
                                         <input type="text" name="name" placeholder="Give a name" required>
                                     </label>
+
+                                    <input type="hidden" name="_csrf" value="{{token}}">
+
                                     <button class="btn-add" type="submit">Add Network</button>
                                 </form>
                             </div>
@@ -163,6 +175,9 @@
                                     <label class="form-entry-add">
                                         <input type="text" name="name" placeholder="Give a name" required>
                                     </label>
+
+                                    <input type="hidden" name="_csrf" value="{{token}}">
+
                                     <button class="btn-add" type="submit">Add Volume</button>
                                 </form>
                             </div>
