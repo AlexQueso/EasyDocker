@@ -15,5 +15,4 @@ public class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
         modelAndView.addObject("token", token.getToken());
     }
-
 }

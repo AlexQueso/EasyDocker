@@ -3,13 +3,17 @@ package com.include.easydocker.session;
 import com.include.easydocker.classes.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @SessionScope
 public class UsersSession {
+
+    private WebSocketSession webSocketSession;
 
     private boolean logged = false;
 
@@ -135,4 +139,33 @@ public class UsersSession {
         this.getTemporalUserInformation().getNetwork().remove(id);
     }
 
+    public WebSocketSession getWebSocketSession() {
+        return webSocketSession;
+    }
+
+    public void setWebSocketSession(WebSocketSession session) {
+        this.webSocketSession = session;
+    }
+
+    public void sendLog(String log) throws IOException {
+        synchronized (webSocketSession) {
+            webSocketSession.sendMessage(new TextMessage(log));
+            System.out.println("Sent message '" + log + "' to client " + webSocketSession.getId());
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

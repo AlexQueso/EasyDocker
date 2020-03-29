@@ -3,6 +3,8 @@ package com.include.easydocker.controller;
 import com.include.easydocker.classes.Network;
 import com.include.easydocker.classes.Service;
 import com.include.easydocker.classes.Volume;
+import com.include.easydocker.rabbit.DockerRequest;
+import com.include.easydocker.rabbit.Producer;
 import com.include.easydocker.services.EditorService;
 import com.include.easydocker.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class EditorController {
 
     public EditorService editorService;
+    public Producer producer;
 
     @Autowired
-    public EditorController(EditorService editorService) {
+    public EditorController(EditorService editorService, Producer producer) {
         this.editorService = editorService;
+        this.producer = producer;
     }
 
     @PostMapping(value = "/new-volume/{idTemplate}")
@@ -128,7 +135,7 @@ public class EditorController {
     }
 
     @PostMapping(value = "/save-properties/{id}/{added}")
-    public String savePorperties(@PathVariable long id, @PathVariable String added, String properties){
+    public String saveProperties(@PathVariable long id, @PathVariable String added, String properties){
         switch (added) {
             case "network": editorService.savePropertiesNetwork(id, properties);
                 break;
@@ -152,13 +159,21 @@ public class EditorController {
 
     @PostMapping(value = "/pull-from-hub/{id}")
     public String addDockerToService(@PathVariable long id, String dockerName){
-        // TODO David: anadir imagen a las properties
+        // TODO David: añadir imagen a las properties
         return Utils.redirectTo("/service/" + id);
     }
 
     @PostMapping(value = "/build-dockerfile/{id}")
     public String buildDockerFileAndPush(@PathVariable long id, String dockerfile){
         // TODO David: anadir imagen a las properties
+
+        String function = "build";
+        Map<String, String> body = new HashMap<>();
+        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
+        body.put("tag", "");
+        DockerRequest request = new DockerRequest(function, body);
+        producer.sendRealTimeResponse(request);
+
         return Utils.redirectTo("/service/" + id);
     }
 }

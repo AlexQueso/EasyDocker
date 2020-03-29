@@ -1,4 +1,4 @@
-package com.include.easydocker.Rabbit;
+package com.include.easydocker.rabbit;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;

@@ -1,4 +1,4 @@
-package com.include.easydocker.Rabbit;
+package com.include.easydocker.rabbit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
