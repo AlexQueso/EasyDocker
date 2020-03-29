@@ -12,14 +12,17 @@ import java.util.List;
 @Component
 public class AppService {
 
+    @Autowired
+    private UsersSession usersSession;
+
     private final RepositoriesManager repositoryManager;
-    private final UsersSession usersSession;
+    //private final UsersSession usersSession;
     private final EditorService editorService;
 
     @Autowired
-    public AppService(RepositoriesManager repositoryManager, UsersSession usersSession, EditorService editorService) {
+    public AppService(RepositoriesManager repositoryManager, /*UsersSession usersSession, */EditorService editorService) {
         this.repositoryManager = repositoryManager;
-        this.usersSession = usersSession;
+        //this.usersSession = usersSession;
         this.editorService = editorService;
     }
 

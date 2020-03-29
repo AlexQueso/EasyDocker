@@ -27,12 +27,12 @@ public class Consumer {
 //            usersSession.sendLog(message);
 //        }
         batch.forEach(message -> System.out.println("Message in 'REPLAY_QUEUE' batch: " + message));
-        batch.forEach(message -> {
-            try {
-                usersSession.sendLog(message.getResponse());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+//        batch.forEach(message -> {
+//            try {
+//                usersSession.sendLog(message.getResponse());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
     }
 }

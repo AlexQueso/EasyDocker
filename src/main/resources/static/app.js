@@ -1,11 +1,7 @@
 function run(){
-    let socket = new WebSocket
-    ('ws://'+location.hostname+(location.port ? ':'+location.port: '')+'/ws');
-
+    let socket = new WebSocket ('wss://'+location.hostname+(location.port ? ':'+location.port: '')+'/ws');
     socket.onmessage = event => {
-        let msg = JSON.parse(event.data);
-        $('#logs').append(msg).append("\n");
+        $('#logs').append(event.data).append("\n");
     };
 }
-
 run();

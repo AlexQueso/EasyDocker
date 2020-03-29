@@ -1,13 +1,19 @@
 package com.include.easydocker.services;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.include.easydocker.classes.Network;
 import com.include.easydocker.classes.Service;
 import com.include.easydocker.classes.Volume;
 import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.session.UsersSession;
+import com.include.easydocker.utils.WebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.TextMessage;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 @Component
@@ -15,11 +21,13 @@ public class EditorService {
 
     private final RepositoriesManager repositoryManager;
     private final UsersSession usersSession;
+    private final WebSocketHandler webSocketHandler;
 
     @Autowired
-    public EditorService(RepositoriesManager repositoryManager, UsersSession usersSession) {
+    public EditorService(RepositoriesManager repositoryManager, UsersSession usersSession, WebSocketHandler webSocketHandler) {
         this.repositoryManager = repositoryManager;
         this.usersSession = usersSession;
+        this.webSocketHandler = webSocketHandler;
     }
 
     public void createService(long idTemplate, Service service) {
@@ -188,5 +196,20 @@ public class EditorService {
         }
         else
             usersSession.getService(id).setProperties(properties);
+    }
+
+    public void sendLog(String log){
+
+        Thread t = new Thread(() -> {
+            for (int i= 0; i <10; i++)
+                try{
+                    WebSocketHandler.webSocketSession.sendMessage(new TextMessage(log));
+                    System.out.println("Sent message '" + log + "' to client " + WebSocketHandler.webSocketSession.getId());
+                    Thread.sleep(1000);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+        });
+        t.start();
     }
 }

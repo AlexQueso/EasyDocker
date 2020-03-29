@@ -148,10 +148,8 @@ public class UsersSession {
     }
 
     public void sendLog(String log) throws IOException {
-        synchronized (webSocketSession) {
             webSocketSession.sendMessage(new TextMessage(log));
             System.out.println("Sent message '" + log + "' to client " + webSocketSession.getId());
-        }
     }
 
 }

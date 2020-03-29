@@ -21,12 +21,11 @@ import java.util.Map;
 public class EditorController {
 
     public EditorService editorService;
-    public Producer producer;
+
 
     @Autowired
-    public EditorController(EditorService editorService, Producer producer) {
+    public EditorController(EditorService editorService) {
         this.editorService = editorService;
-        this.producer = producer;
     }
 
     @PostMapping(value = "/new-volume/{idTemplate}")
@@ -166,13 +165,14 @@ public class EditorController {
     @PostMapping(value = "/build-dockerfile/{id}")
     public String buildDockerFileAndPush(@PathVariable long id, String dockerfile){
         // TODO David: anadir imagen a las properties
-
-        String function = "build";
-        Map<String, String> body = new HashMap<>();
-        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
-        body.put("tag", "");
-        DockerRequest request = new DockerRequest(function, body);
-        producer.sendRealTimeResponse(request);
+//
+//        String function = "build";
+//        Map<String, String> body = new HashMap<>();
+//        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
+//        body.put("tag", "");
+//        DockerRequest request = new DockerRequest(function, body);
+//        producer.sendRealTimeResponse(request);
+        editorService.sendLog("123j45");
 
         return Utils.redirectTo("/service/" + id);
     }
