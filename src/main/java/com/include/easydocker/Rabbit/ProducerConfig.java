@@ -1,17 +1,18 @@
 package com.include.easydocker.Rabbit;
 
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
+
 @Configuration
+@EnableRabbit
 public class ProducerConfig {
 
     static final String DOCKER_SERVICE_EXCHANGE_NAME = "app.docker.service";
@@ -19,15 +20,19 @@ public class ProducerConfig {
     static final String DOCKER_SERVICE_REPLY_QUEUE_NAME = "app.docker.reply";
     static final String DOCKER_SERVICE_ROUTING_KEY_NAME = "docker";
 
-    private final RabbitTemplate rabbitTemplate;
-    private final ConnectionFactory connectionFactory;
-
-    @Autowired
-    public ProducerConfig(RabbitTemplate rabbitTemplate, ConnectionFactory connectionFactory) {
-        this.rabbitTemplate = rabbitTemplate;
-        this.connectionFactory = connectionFactory;
+    @Bean
+    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(
+            SimpleRabbitListenerContainerFactoryConfigurer configurer,
+            ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        configurer.configure(factory, connectionFactory);
+        factory.setConnectionFactory(connectionFactory);
+        factory.setBatchListener(true);
+        factory.setConsumerBatchEnabled(true);
+        factory.setDeBatchingEnabled(true);
+        factory.setReceiveTimeout(1000L);
+        return factory;
     }
-
 
     @Bean
     DirectExchange exchange() {
@@ -36,12 +41,12 @@ public class ProducerConfig {
 
     @Bean
     Queue requestQueue() {
-        return QueueBuilder.durable(DOCKER_SERVICE_REQUEST_QUEUE_NAME).build();
+        return QueueBuilder.nonDurable(DOCKER_SERVICE_REQUEST_QUEUE_NAME).build();
     }
 
     @Bean
     Queue replyQueue() {
-        return QueueBuilder.durable(DOCKER_SERVICE_REPLY_QUEUE_NAME).build();
+        return QueueBuilder.nonDurable(DOCKER_SERVICE_REPLY_QUEUE_NAME).build();
     }
 
     @Bean
@@ -55,10 +60,8 @@ public class ProducerConfig {
     }
 
     @Bean
-    AsyncRabbitTemplate template() {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
-        container.setQueueNames(DOCKER_SERVICE_REPLY_QUEUE_NAME);
-        return new AsyncRabbitTemplate(rabbitTemplate, container);
+    public Consumer listener() {
+        return new Consumer();
     }
 
 }
