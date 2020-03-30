@@ -198,14 +198,37 @@ public class EditorService {
             usersSession.getService(id).setProperties(properties);
     }
 
-    public void sendLog(String sintaxis){
-        // TODO: BORRAR
-        String function = "build";
+    public void buildPushList (String function, String tag, String dockerfile){
         Map<String, String> body = new HashMap<>();
-        body.put("tag", "nuevo-listener");
-        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hsd123retretgola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
+        if (tag != null)
+            body.put("tag", tag);
+        if (dockerfile != null)
+            body.put("dockerfile", dockerfile);
         DockerRequest request = new DockerRequest(function, body);
 
-        producer.sendRealTimeResponse(request, MessageHandlerImplementations.factory(MessageHandlerImplementations.AFTER_BUILD));
+        switch(function){
+            case "build":
+                producer.sendRealTimeResponse(request, MessageHandlerImplementations.factory(MessageHandlerImplementations.AFTER_BUILD));
+                break;
+            case "push":
+                producer.sendRealTimeResponse(request, MessageHandlerImplementations.factory(MessageHandlerImplementations.AFTER_PUSH));
+                break;
+            case "list":
+                producer.sendRealTimeResponse(request, MessageHandlerImplementations.factory(MessageHandlerImplementations.AFTER_LIST));
+                break;
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

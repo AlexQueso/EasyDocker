@@ -19,13 +19,6 @@ public class DockerRequest {
         this.body = body;
     }
 
-    public DockerRequest(String function, Map<String, String> body, Runnable runnable) {
-        this.function = function;
-        this.body = body;
-        this.runnable = runnable;
-        new Thread (runnable).start();
-    }
-
     public String getFunction() {
         return function;
     }

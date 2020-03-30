@@ -161,28 +161,21 @@ public class EditorController {
         return Utils.redirectTo("/service/" + id);
     }
 
-    @PostMapping(value = "/build-dockerfile/{id}")
-    public String buildDockerFile(@PathVariable long id, String dockerfile){
-//        String function = "build";
-//        Map<String, String> body = new HashMap<>();
-//        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
-//        body.put("tag", "");
-//        DockerRequest request = new DockerRequest(function, body);
-//        producer.sendRealTimeResponse(request);
-        editorService.sendLog("123j45");
-
-        return Utils.redirectTo("/service/" + id);
+    @PostMapping(value = "/build-dockerfile/{idService}")
+    public String buildDockerFile(@PathVariable long idService, String tag, String dockerfile){
+        editorService.buildPushList("build", tag, dockerfile);
+        return Utils.redirectTo("/service/" + idService);
     }
 
     @PostMapping(value = "/push-dockerfile/{id}")
-    public String pushDockerFile(@PathVariable long id, String dockerfile){
-        // TODO:
+    public String pushDockerFile(@PathVariable long id, String tag, String dockerfile){
+        editorService.buildPushList("push", tag, dockerfile);
         return Utils.redirectTo("/service/" + id);
     }
 
     @PostMapping(value = "/show-list")
     public String showList(@PathVariable long id){
-        // TODO:
+        editorService.buildPushList("list", null, null);
         return Utils.redirectTo("/service/" + id);
     }
 

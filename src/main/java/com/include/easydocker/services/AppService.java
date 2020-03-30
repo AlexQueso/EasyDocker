@@ -104,9 +104,7 @@ public class AppService {
     }
 
     public String compose(Template template) {
-        LinkedList<Service> services = (LinkedList<Service>) template.getServices();
-        LinkedList<Network> networks = (LinkedList<Network>) template.getNetworks();
-        LinkedList<Volume> volumes = (LinkedList<Volume>) template.getVolumes();
+        template.getVolumes();
 
 
         return "";
