@@ -22,7 +22,6 @@ public class EditorController {
 
     public EditorService editorService;
 
-
     @Autowired
     public EditorController(EditorService editorService) {
         this.editorService = editorService;
@@ -164,8 +163,6 @@ public class EditorController {
 
     @PostMapping(value = "/build-dockerfile/{id}")
     public String buildDockerFileAndPush(@PathVariable long id, String dockerfile){
-        // TODO David: anadir imagen a las properties
-//
 //        String function = "build";
 //        Map<String, String> body = new HashMap<>();
 //        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");

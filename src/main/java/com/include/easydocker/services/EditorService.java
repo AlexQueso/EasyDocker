@@ -1,33 +1,32 @@
 package com.include.easydocker.services;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.include.easydocker.classes.Network;
 import com.include.easydocker.classes.Service;
 import com.include.easydocker.classes.Volume;
 import com.include.easydocker.managers.RepositoriesManager;
+import com.include.easydocker.rabbit.DockerRequest;
+import com.include.easydocker.rabbit.Producer;
 import com.include.easydocker.session.UsersSession;
 import com.include.easydocker.utils.WebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.TextMessage;
 
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 @Component
 public class EditorService {
 
     private final RepositoriesManager repositoryManager;
     private final UsersSession usersSession;
-    private final WebSocketHandler webSocketHandler;
+    private final Producer producer;
 
     @Autowired
-    public EditorService(RepositoriesManager repositoryManager, UsersSession usersSession, WebSocketHandler webSocketHandler) {
+    public EditorService(RepositoriesManager repositoryManager, UsersSession usersSession, Producer producer) {
         this.repositoryManager = repositoryManager;
         this.usersSession = usersSession;
-        this.webSocketHandler = webSocketHandler;
+        this.producer = producer;
     }
 
     public void createService(long idTemplate, Service service) {
@@ -199,17 +198,11 @@ public class EditorService {
     }
 
     public void sendLog(String log){
-
-        Thread t = new Thread(() -> {
-            for (int i= 0; i <10; i++)
-                try{
-                    WebSocketHandler.webSocketSession.sendMessage(new TextMessage(log));
-                    System.out.println("Sent message '" + log + "' to client " + WebSocketHandler.webSocketSession.getId());
-                    Thread.sleep(1000);
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-        });
-        t.start();
+        String function = "build";
+        Map<String, String> body = new HashMap<>();
+        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
+        body.put("tag", "");
+        DockerRequest request = new DockerRequest(function, body);
+        producer.sendRealTimeResponse(request);
     }
 }

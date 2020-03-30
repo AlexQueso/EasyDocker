@@ -21,26 +21,14 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        //usersSession.setWebSocketSession(session);
-        this.webSocketSession = session;
-//        ObjectMapper json = new ObjectMapper().setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-
-//        Thread t = new Thread(() -> {
-//            while (true)
-//                try {
-//                    String msgJson =  json.writeValueAsString(Math.random());
-//                    session.sendMessage(new TextMessage(msgJson));
-//                    System.out.println("Sent message '" + msgJson + "' to client " + session.getId());
-//                    sleep(1000);
-//                } catch (IOException | InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//        });
-//        t.start();
+        webSocketSession = session;
     }
 
-    @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        session.sendMessage(message);
+    public static void sendMessage(String msg){
+        try {
+            webSocketSession.sendMessage(new TextMessage(msg));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
