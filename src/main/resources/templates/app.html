@@ -201,9 +201,14 @@
                 </div>
 
                 <div class="editor-columns">
-                    <textarea name="logs"></textarea>
+                    <textarea name="logs">{{compose}}</textarea>
                 </div>
-
+                <div>
+                    <form method="post" class="form vertical" action="/compose/{{idTemplate}}">
+                        <input type="hidden" name="_csrf" value="{{token}}">
+                        <button class="btn-add" type="submit">Compose</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

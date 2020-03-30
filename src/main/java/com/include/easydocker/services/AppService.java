@@ -12,17 +12,14 @@ import java.util.List;
 @Component
 public class AppService {
 
-    @Autowired
-    private UsersSession usersSession;
-
     private final RepositoriesManager repositoryManager;
-    //private final UsersSession usersSession;
+    private final UsersSession usersSession;
     private final EditorService editorService;
 
     @Autowired
-    public AppService(RepositoriesManager repositoryManager, /*UsersSession usersSession, */EditorService editorService) {
+    public AppService(RepositoriesManager repositoryManager, UsersSession usersSession, EditorService editorService) {
         this.repositoryManager = repositoryManager;
-        //this.usersSession = usersSession;
+        this.usersSession = usersSession;
         this.editorService = editorService;
     }
 
@@ -104,5 +101,14 @@ public class AppService {
         }
         else
             usersSession.deleteTemplate(idTemplate);
+    }
+
+    public String compose(Template template) {
+        LinkedList<Service> services = (LinkedList<Service>) template.getServices();
+        LinkedList<Network> networks = (LinkedList<Network>) template.getNetworks();
+        LinkedList<Volume> volumes = (LinkedList<Volume>) template.getVolumes();
+
+
+        return "";
     }
 }

@@ -78,6 +78,7 @@ public class AppController {
         model.addAttribute("services", t.getServices());
         model.addAttribute("networks", t.getNetworks());
         model.addAttribute("volumes", t.getVolumes());
+        model.addAttribute("compose", "for instance... ");
 
         return "app";
     }
@@ -102,10 +103,20 @@ public class AppController {
                 .getUser().getName());
     }
 
-    @GetMapping("/generate-compose/{id}")
-    public String generateCompose(@PathVariable long id) {
+    @GetMapping("/compose/{idTemplate}")
+    public String generateCompose(@PathVariable long id, Model model) {
+        showLoggedInfoOrTemporal(model);
 
-        //TODO:
+        Template t = appService.templateOverview(id);
+        String dockerCompose = appService.compose(t);
+
+        model.addAttribute("idTemplate", t.getId());
+        model.addAttribute("template", true);
+
+        model.addAttribute("services", t.getServices());
+        model.addAttribute("networks", t.getNetworks());
+        model.addAttribute("volumes", t.getVolumes());
+        model.addAttribute("compose", "");
 
         return Utils.redirectTo("/template/" + id);
     }
