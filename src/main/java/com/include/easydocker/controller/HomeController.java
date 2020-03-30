@@ -64,4 +64,9 @@ public class HomeController {
         homeService.createUserTemporal();
         return Utils.redirectTo("/user-overview");
     }
+
+    @GetMapping("/error")
+    public String error() {
+        return Utils.redirectTo("/");
+    }
 }

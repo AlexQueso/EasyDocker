@@ -22,10 +22,10 @@ public class CSRFHandlerConfiguration extends WebMvcConfigurerAdapter {
 
         @Override
         public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView){
-            CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-            modelAndView.addObject("token", token.getToken());
+            if (modelAndView != null) {
+                CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+                modelAndView.addObject("token", token.getToken());
+            }
         }
-
     }
-
 }
