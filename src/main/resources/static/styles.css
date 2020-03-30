@@ -421,6 +421,12 @@ button:focus {
     display: flex;
 }
 
+.editor-columns textarea{
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
+}
+
 .editor-col {
     flex-grow: 1;
     display: flex;

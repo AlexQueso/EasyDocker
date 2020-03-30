@@ -219,11 +219,43 @@
 
                                         <input type="hidden" name="_csrf" value="{{token}}">
 
-                                        <button class="btn-add" type="submit">Build and Push</button>
+                                        <button class="btn-add" type="submit">Build</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="editor-col-list">
+                            <div>
+                                <div>
+                                    <form method="post" class="form vertical" action="/show-list">
+                                        <input type="hidden" name="_csrf" value="{{token}}">
+                                        <button class="btn-add" type="submit">Show List</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="editor-col-list">
+                            <div>
+                                <div>
+                                    <form method="post" class="form vertical" action="/push-dockerfile/{{idService}}">
+                                        <label class="form-entry-add">
+                                            <input type="text" name="tag" placeholder="Tag Docker" required>
+                                        </label>
+
+                                        <label class="form-entry-add">
+                                            <textarea name="dockerfile" rows=5 cols=40></textarea>
+                                        </label>
+
+                                        <input type="hidden" name="_csrf" value="{{token}}">
+
+                                        <button class="btn-add" type="submit">Push</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="editor-col">
                         <div class="editor-col-header">

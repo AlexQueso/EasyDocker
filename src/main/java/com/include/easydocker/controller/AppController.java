@@ -101,4 +101,12 @@ public class AppController {
         model.addAttribute("username", appService.getUsersSession()
                 .getUser().getName());
     }
+
+    @GetMapping("/generate-compose/{id}")
+    public String generateCompose(@PathVariable long id) {
+
+        //TODO:
+
+        return Utils.redirectTo("/template/" + id);
+    }
 }

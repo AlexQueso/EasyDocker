@@ -162,7 +162,7 @@ public class EditorController {
     }
 
     @PostMapping(value = "/build-dockerfile/{id}")
-    public String buildDockerFileAndPush(@PathVariable long id, String dockerfile){
+    public String buildDockerFile(@PathVariable long id, String dockerfile){
 //        String function = "build";
 //        Map<String, String> body = new HashMap<>();
 //        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
@@ -173,4 +173,17 @@ public class EditorController {
 
         return Utils.redirectTo("/service/" + id);
     }
+
+    @PostMapping(value = "/push-dockerfile/{id}")
+    public String pushDockerFile(@PathVariable long id, String dockerfile){
+        // TODO:
+        return Utils.redirectTo("/service/" + id);
+    }
+
+    @PostMapping(value = "/show-list")
+    public String showList(@PathVariable long id){
+        // TODO:
+        return Utils.redirectTo("/service/" + id);
+    }
+
 }
