@@ -104,11 +104,22 @@ public class AppService {
     }
 
     public String compose(Template template) {
-        LinkedList<Service> services = (LinkedList<Service>) template.getServices();
-        LinkedList<Network> networks = (LinkedList<Network>) template.getNetworks();
-        LinkedList<Volume> volumes = (LinkedList<Volume>) template.getVolumes();
+        List<Service> services = template.getServices();
+        List<Network> networks = template.getNetworks();
+        List<Volume> volumes = template.getVolumes();
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("version: '3'\n");
+        sb.append("services:\n");
+        for (Service service : services)
+            sb.append(service.toCompose());
+        sb.append("volumes:\n");
+        for (Volume volume : volumes)
+            sb.append(volume.toCompose());
+        sb.append("networks:\n");
+        for (Network network : networks)
+            sb.append(network.toCompose());
 
-        return "";
+        return sb.toString();
     }
 }

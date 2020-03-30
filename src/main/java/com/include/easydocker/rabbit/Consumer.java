@@ -23,11 +23,10 @@ public class Consumer {
 
     @RabbitListener(
             queues = DOCKER_SERVICE_REPLY_QUEUE_NAME,
-            containerFactory = "simpleRabbitListenerContainerFactory"
+            concurrency = "1"
     )
     public void receiveMessage(@Payload DockerResponse msg, @Header(CORRELATION_ID) String rk) {
-        System.out.println("Received batch of msg " + msg.toString() + " from 'workingBatchQueue'");
-        System.out.println("Received batch of correlation " + rk + " from 'workingBatchQueue'");
+        System.out.println("Received msg: " + msg.toString() + " from 'app.docker.reply'");
 
         MessageHandler handler = corrIdAndHandler.get(rk);
         handler.setMessage(msg);

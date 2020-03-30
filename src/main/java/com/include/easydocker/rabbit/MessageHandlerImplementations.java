@@ -34,20 +34,20 @@ class AfterBuildMessageHandler extends MessageHandler{
 class AfterPushMessageHandler extends MessageHandler{
 
     public void run() {
-        WebSocketHandler.sendMessage(this.message.toString());
+        WebSocketHandler.sendMessage(this.message.getResponse());
     }
 }
 
 class AfterListMessageHandler extends MessageHandler{
 
     public void run() {
-        WebSocketHandler.sendMessage(this.message.toString());
+        WebSocketHandler.sendMessage(this.message.getResponse());
     }
 }
 
 class AfterCheckMessageHandler extends MessageHandler{
 
     public void run() {
-        WebSocketHandler.sendMessage(this.message.toString());
+        WebSocketHandler.sendMessage(this.message.getResponse());
     }
 }

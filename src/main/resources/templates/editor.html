@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Editor</title>
     <link rel="stylesheet" href="/styles.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 
 </head>
@@ -192,9 +192,10 @@
                             <p>Docker</p>
                         </div>
                         <div class="editor-col-list">
+<!--                            todo: quesada-->
                             <div>
                                 <div>
-                                    <form method="post" class="form vertical" action="/pull-from-hub/{{idService}}">
+                                    <form method="post" class="form vertical" action="/set-image/{{idService}}">
                                         <label class="form-entry-add">
                                             <input type="text" name="name" placeholder="Docker image" required>
                                         </label>
@@ -210,9 +211,11 @@
                             <div>
                                 <div>
                                     <form method="post" class="form vertical" action="/build-dockerfile/{{idService}}">
+
                                         <label class="form-entry-add">
                                             <input type="text" name="tag" placeholder="Tag Docker" required>
                                         </label>
+
                                         <label class="form-entry-add">
                                             <textarea name="dockerfile" rows=5 cols=40></textarea>
                                         </label>
@@ -228,7 +231,7 @@
                         <div class="editor-col-list">
                             <div>
                                 <div>
-                                    <form method="post" class="form vertical" action="/show-list">
+                                    <form method="post" class="form vertical" action="/show-list/{{idService}}">
                                         <input type="hidden" name="_csrf" value="{{token}}">
                                         <button class="btn-add" type="submit">Show List</button>
                                     </form>
@@ -242,10 +245,6 @@
                                     <form method="post" class="form vertical" action="/push-dockerfile/{{idService}}">
                                         <label class="form-entry-add">
                                             <input type="text" name="tag" placeholder="Tag Docker" required>
-                                        </label>
-
-                                        <label class="form-entry-add">
-                                            <textarea name="dockerfile" rows=5 cols=40></textarea>
                                         </label>
 
                                         <input type="hidden" name="_csrf" value="{{token}}">

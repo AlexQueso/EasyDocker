@@ -1,5 +1,7 @@
 package com.include.easydocker.classes;
 
+import com.include.easydocker.utils.Utils;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +14,7 @@ public class Service {
     private long id;
 
     private String name;
+    private String image;
     private String properties;
 
     @ManyToOne
@@ -28,6 +31,15 @@ public class Service {
 
     public Service(String name){
         this.name = name;
+    }
+
+    public String toCompose(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(Utils.toCompose(this.getName(), this.getProperties()));
+        sb.append("    networks:\n");
+        for(Network network : networks)
+            sb.append("    - ").append(network.getName());
+        return sb.toString();
     }
 
     public long getId() {

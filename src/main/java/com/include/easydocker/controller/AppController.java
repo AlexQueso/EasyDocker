@@ -103,11 +103,11 @@ public class AppController {
                 .getUser().getName());
     }
 
-    @GetMapping("/compose/{idTemplate}")
-    public String generateCompose(@PathVariable long id, Model model) {
+    @PostMapping("/compose/{idTemplate}")
+    public String generateCompose(@PathVariable long idTemplate, Model model) {
         showLoggedInfoOrTemporal(model);
 
-        Template t = appService.templateOverview(id);
+        Template t = appService.templateOverview(idTemplate);
         String dockerCompose = appService.compose(t);
 
         model.addAttribute("idTemplate", t.getId());
