@@ -11,20 +11,17 @@ import static com.include.easydocker.rabbit.ProducerConfig.DOCKER_SERVICE_ROUTIN
 @Component
 public class Producer {
     private RabbitTemplate rabbitTemplate;
+    private Consumer consumer;
 
-    public Producer(RabbitTemplate rabbitTemplate) {
+    public Producer(RabbitTemplate rabbitTemplate, Consumer consumer) {
         this.rabbitTemplate = rabbitTemplate;
+        this.consumer = consumer;
     }
 
-    public void sendRealTimeResponse(DockerRequest request){
-//        String function = "build";
-//        Map<String, String> body = new HashMap<>();
-//        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
-//        DockerRequest request = new DockerRequest(function, body);
-
+    public void sendRealTimeResponse(DockerRequest request, MessageHandler runnable){
         String correlationId = UUID.randomUUID().toString();
-
         System.out.println("Thread: '{ " + Thread.currentThread().getName() + " }' calc petition '{" + request.toString() + "}'");
+
         rabbitTemplate.convertAndSend(DOCKER_SERVICE_EXCHANGE_NAME, DOCKER_SERVICE_ROUTING_KEY_NAME, request, m -> {
             m.getMessageProperties().setReplyTo(DOCKER_SERVICE_REPLY_QUEUE_NAME);
             m.getMessageProperties().setCorrelationId(correlationId);
@@ -33,6 +30,8 @@ public class Producer {
             m.getMessageProperties().setHeader("ServiceName", "docker");
             return m;
         });
+
+        consumer.waitForMessageAndHandle(correlationId, runnable);
     }
 
 }

@@ -5,6 +5,7 @@ import com.include.easydocker.classes.Service;
 import com.include.easydocker.classes.Volume;
 import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.rabbit.DockerRequest;
+import com.include.easydocker.rabbit.MessageHandlerImplementations;
 import com.include.easydocker.rabbit.Producer;
 import com.include.easydocker.session.UsersSession;
 import com.include.easydocker.utils.WebSocketHandler;
@@ -197,12 +198,14 @@ public class EditorService {
             usersSession.getService(id).setProperties(properties);
     }
 
-    public void sendLog(String log){
+    public void sendLog(String sintaxis){
+        // TODO: BORRAR
         String function = "build";
         Map<String, String> body = new HashMap<>();
-        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hs234gola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
-        body.put("tag", "");
+        body.put("tag", "nuevo-listener");
+        body.put("dockerfile", "FROM ubuntu:16.04 \n RUN echo hsd123retretgola \n RUN apt-get update -y && apt-get install -y python-pip python-dev");
         DockerRequest request = new DockerRequest(function, body);
-        producer.sendRealTimeResponse(request);
+
+        producer.sendRealTimeResponse(request, MessageHandlerImplementations.factory(MessageHandlerImplementations.AFTER_BUILD));
     }
 }

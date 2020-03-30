@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Configuration
@@ -27,10 +29,6 @@ public class ProducerConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
         factory.setConnectionFactory(connectionFactory);
-        factory.setBatchListener(true);
-        factory.setConsumerBatchEnabled(true);
-        factory.setDeBatchingEnabled(true);
-        factory.setReceiveTimeout(1000L);
         return factory;
     }
 
@@ -57,6 +55,11 @@ public class ProducerConfig {
     @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
+    }
+
+    @Bean
+    public Map<String, MessageHandler> responseHandler() {
+        return new HashMap<>();
     }
 
     @Bean
