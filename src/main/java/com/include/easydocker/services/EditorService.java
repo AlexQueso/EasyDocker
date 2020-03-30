@@ -8,7 +8,6 @@ import com.include.easydocker.rabbit.DockerRequest;
 import com.include.easydocker.rabbit.MessageHandlerImplementations;
 import com.include.easydocker.rabbit.Producer;
 import com.include.easydocker.session.UsersSession;
-import com.include.easydocker.utils.WebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -198,13 +197,16 @@ public class EditorService {
             usersSession.getService(id).setProperties(properties);
     }
 
-    public void buildPushList (String function, String tag, String dockerfile){
+    public void buildPushList (String function, String tag, String dockerfile, String repository){
         Map<String, String> body = new HashMap<>();
         if (tag != null)
             body.put("tag", tag);
         if (dockerfile != null)
             body.put("dockerfile", dockerfile);
+        if (repository != null)
+            body.put("repository", repository);
         DockerRequest request = new DockerRequest(function, body);
+        System.out.println(request.getBody().toString());
 
         switch(function){
             case "build":

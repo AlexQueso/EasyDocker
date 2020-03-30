@@ -25,4 +25,15 @@ public class Utils {
     public static String redirectTo(String url) {
         return "redirect:" + url;
     }
+
+    public static String toCompose(String name, String properties){
+        StringBuilder sb = new StringBuilder();
+        sb.append("  ").append(name).append(":\n");
+        if(properties == null)
+                return sb.toString();
+        String[] lines = properties.split("\\r?\\n");
+        for(String line : lines)
+            sb.append("    ").append(line).append("\n");
+        return sb.toString();
+    }
 }

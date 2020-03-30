@@ -1,6 +1,9 @@
 package com.include.easydocker.classes;
 
+import com.include.easydocker.utils.Utils;
+
 import javax.persistence.*;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +27,10 @@ public class Network {
 
     public Network(String name){
         this.name = name;
+    }
+
+    public String toCompose(){
+        return Utils.toCompose(this.getName(), this.getProperties());
     }
 
     public Long getId() {

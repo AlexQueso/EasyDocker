@@ -3,8 +3,6 @@ package com.include.easydocker.controller;
 import com.include.easydocker.classes.Network;
 import com.include.easydocker.classes.Service;
 import com.include.easydocker.classes.Volume;
-import com.include.easydocker.rabbit.DockerRequest;
-import com.include.easydocker.rabbit.Producer;
 import com.include.easydocker.services.EditorService;
 import com.include.easydocker.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class EditorController {
@@ -155,27 +151,21 @@ public class EditorController {
                 .getUser().getName());
     }
 
-    @PostMapping(value = "/pull-from-hub/{id}")
-    public String addDockerToService(@PathVariable long id, String dockerName){
-        // TODO David: añadir imagen a las properties
-        return Utils.redirectTo("/service/" + id);
-    }
-
     @PostMapping(value = "/build-dockerfile/{idService}")
     public String buildDockerFile(@PathVariable long idService, String tag, String dockerfile){
-        editorService.buildPushList("build", tag, dockerfile);
+        editorService.buildPushList("build", tag, dockerfile, null);
         return Utils.redirectTo("/service/" + idService);
     }
 
     @PostMapping(value = "/push-dockerfile/{id}")
-    public String pushDockerFile(@PathVariable long id, String tag, String dockerfile){
-        editorService.buildPushList("push", tag, dockerfile);
+    public String pushDockerFile(@PathVariable long id, String tag){
+        editorService.buildPushList("push", null, null, tag);
         return Utils.redirectTo("/service/" + id);
     }
 
-    @PostMapping(value = "/show-list")
+    @PostMapping(value = "/show-list/{id}")
     public String showList(@PathVariable long id){
-        editorService.buildPushList("list", null, null);
+        editorService.buildPushList("list", null, null, null);
         return Utils.redirectTo("/service/" + id);
     }
 

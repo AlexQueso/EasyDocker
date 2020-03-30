@@ -28,6 +28,7 @@ public class ProducerConfig {
             ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
+        factory.setConcurrentConsumers(1);
         factory.setConnectionFactory(connectionFactory);
         factory.setConcurrentConsumers(1);
         return factory;
