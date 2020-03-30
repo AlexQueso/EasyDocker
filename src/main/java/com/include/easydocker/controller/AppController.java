@@ -78,7 +78,7 @@ public class AppController {
         model.addAttribute("services", t.getServices());
         model.addAttribute("networks", t.getNetworks());
         model.addAttribute("volumes", t.getVolumes());
-        model.addAttribute("compose", "for instance... ");
+        model.addAttribute("compose", "");
 
         return "app";
     }
@@ -116,8 +116,8 @@ public class AppController {
         model.addAttribute("services", t.getServices());
         model.addAttribute("networks", t.getNetworks());
         model.addAttribute("volumes", t.getVolumes());
-        model.addAttribute("compose", "");
+        model.addAttribute("compose", dockerCompose);
 
-        return Utils.redirectTo("/template/" + id);
+        return "app";
     }
 }
