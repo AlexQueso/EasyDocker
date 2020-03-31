@@ -51,8 +51,29 @@ En esta página se pueden añadir services a un volume y modificar sus propertie
 - Volumes: conjunto de volumes dentro de un Service con sus propiedades
 #### Diagrama Entidad/Relación
 ![alt text](/src/main/resources/static/PNG/diagramaER.png "Diagrama ER")
-#### Diagrama de clases UML
-![alt text](/src/main/resources/static/PNG/diagramaClasesUML.png "Diagrama clases UML")
+
+## Diagramas
+#### Diagrama de Microservicios:
+![alt text](/src/main/resources/static/PNG/diagramaConn.png "Diagrama de microservicios")
+
+#### Diagrama de paquetes:
+![alt text](/src/main/resources/static/PNG/diagramaPackages.png "Diagrama de paquetes")
+
+#### Diagrama general de clases:
+![alt text](/src/main/resources/static/PNG/diagrama_full.png "Diagrama general de clases")
+
+#### Diagrama de interacción del paquete classes:
+![alt text](/src/main/resources/static/PNG/diagramaPackage_classes.png "Diagrama del paquete classes")
+
+#### Diagrama de interacción del paquete rabbit:
+![alt text](/src/main/resources/static/PNG/diagramaPackage_rabbit.png "Diagrama del paquete rabbit")
+
+## Esquema Rabbit
+![alt text](/src/main/resources/static/PNG/RabbitFlow.png "Esquema de flujo de Rabbit")
+
+## Projectos anexos
+- [EasyDockerVagrant](https://github.com/JoseZamora97/EasyDockerVagrant): Este contiene los pasos necesarios para el despliegue en máquinas virtuales a través de Vagrant.
+- [DockerController](https://github.com/DavidCorreas/DockerController): Contiene el servicio interno y el despliegue de microservicios con docker-compose.
 
 ## Descripción de las funcionalidades del servicio interno
 Se va a encargar de generar y construir los dockerfile y docker-compose mediante las especificaciones del usuario a 
