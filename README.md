@@ -49,10 +49,9 @@ En esta página se pueden añadir services a un volume y modificar sus propertie
 - Service: conjunto de dockers con sus propiedades
 - Network: conjunto de networks dentro de un Service con sus propiedades
 - Volumes: conjunto de volumes dentro de un Service con sus propiedades
+
 #### Diagrama Entidad/Relación
 ![alt text](/src/main/resources/static/PNG/diagramaER.png "Diagrama ER")
-#### Diagrama de clases UML
-![alt text](/src/main/resources/static/PNG/diagramaClasesUML.png "Diagrama clases UML")
 
 ## Descripción de las funcionalidades del servicio interno
 Se va a encargar de generar y construir los dockerfile y docker-compose mediante las especificaciones del usuario a 
@@ -63,10 +62,13 @@ través de la interfaz.
 ## Diagramas
 #### Diagrama de paquetes:
 ![alt text](/src/main/resources/static/PNG/diagramaPackages.png "Diagrama de paquetes")
+
 #### Diagrama general de clases:
 ![alt text](/src/main/resources/static/PNG/diagramaFull.png "Diagrama general de clases")
+
 #### Diagrama de interacción del paquete classes:
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_classes.png "Diagrama del paquete classes")
+
 #### Diagrama de interacción del paquete classes:
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_rabbit.png "Diagrama del paquete rabbit")
 
