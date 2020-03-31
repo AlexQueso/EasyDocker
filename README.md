@@ -73,7 +73,7 @@ través de la interfaz.
 #### Diagrama de interacción del paquete rabbit:
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_rabbit.png "Diagrama del paquete rabbit")
 
-## Esquema Rabbit
+## Esquema Servicio Interno
 ![alt text](/src/main/resources/static/PNG/FabbitFlow.png "Esquema de flujo de Rabbit")
 
 ## Projectos anexos
