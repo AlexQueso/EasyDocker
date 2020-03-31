@@ -73,6 +73,9 @@ través de la interfaz.
 #### Diagrama de interacción del paquete rabbit:
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_rabbit.png "Diagrama del paquete rabbit")
 
+## Esquema Rabbit
+![alt text](/src/main/resources/static/PNG/RabbitFlow.png "Esquema de flujo de Rabbit")
+
 ## Projectos anexos
 - [EasyDockerVagrant](https://github.com/JoseZamora97/EasyDockerVagrant): Este contiene los pasos necesarios para el despliegue en máquinas virtuales a través de Vagrant.
 - [DockerController](https://github.com/DavidCorreas/DockerController): Contiene el servicio interno y el despliegue de microservicios con docker-compose.
