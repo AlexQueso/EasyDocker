@@ -103,10 +103,37 @@ public class AppService {
             usersSession.deleteTemplate(idTemplate);
     }
 
-    public String compose(Template template) {
-        List<Service> services = template.getServices();
-        List<Network> networks = template.getNetworks();
-        List<Volume> volumes = template.getVolumes();
+    public List<Service> getServices(long idTemplate){
+        Template t = templateOverview(idTemplate);
+        if (usersSession.isLogged()) {
+            return repositoryManager.getServiceRepository().findByTemplate(t);
+        } else {
+            return t.getServices();
+        }
+    }
+
+    public List<Network> getNetworks(long idTemplate){
+        Template t = templateOverview(idTemplate);
+        if (usersSession.isLogged()) {
+            return repositoryManager.getNetworkRepository().findByTemplate(t);
+        } else {
+            return t.getNetworks();
+        }
+    }
+
+    public List<Volume> getVolumes(long idTemplate){
+        Template t = templateOverview(idTemplate);
+        if (usersSession.isLogged()) {
+            return repositoryManager.getVolumesRepository().findByTemplate(t);
+        } else {
+            return t.getVolumes();
+        }
+    }
+
+    public String compose(long idTemplate) {
+        List<Service> services = getServices(idTemplate);
+        List<Network> networks = getNetworks(idTemplate);
+        List<Volume> volumes = getVolumes(idTemplate);
 
         StringBuilder sb = new StringBuilder();
         sb.append("version: '3'\n");

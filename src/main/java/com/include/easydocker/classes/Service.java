@@ -36,9 +36,12 @@ public class Service {
     public String toCompose(){
         StringBuilder sb = new StringBuilder();
         sb.append(Utils.toCompose(this.getName(), this.getProperties()));
+        sb.append("    image: ").append(this.getImage()).append("\n");
         sb.append("    networks:\n");
+
         for(Network network : networks)
             sb.append("    - ").append(network.getName());
+
         return sb.toString();
     }
 
@@ -88,6 +91,14 @@ public class Service {
 
     public void setProperties(String properties) {
         this.properties = properties;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

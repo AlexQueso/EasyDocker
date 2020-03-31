@@ -89,11 +89,11 @@ public class EditorService {
             return usersSession.getVolume(idVolume);
     }
 
-    public Service serviceProperties(long id) {
+    public Service serviceProperties(long idService) {
         if (usersSession.isLogged())
-            return repositoryManager.getServiceRepository().findById(id);
+            return repositoryManager.getServiceRepository().findById(idService);
         else
-            return usersSession.getService(id);
+            return usersSession.getService(idService);
     }
 
     public Service getService(String name){
@@ -219,6 +219,16 @@ public class EditorService {
                 producer.sendRealTimeResponse(request, MessageHandlerImplementations.factory(MessageHandlerImplementations.AFTER_LIST));
                 break;
         }
+    }
+
+    public void setImage(long idService, String image) {
+        if (usersSession.isLogged()) {
+            Service s = repositoryManager.getServiceRepository().findById(idService);
+            s.setImage(image);
+            repositoryManager.getServiceRepository().save(s);
+        }else
+            usersSession.getService(idService).setImage(image);
+
     }
 }
 

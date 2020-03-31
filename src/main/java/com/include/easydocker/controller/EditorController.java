@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.annotation.PostConstruct;
+
 
 @Controller
 public class EditorController {
@@ -154,6 +156,7 @@ public class EditorController {
     @PostMapping(value = "/build-dockerfile/{idService}")
     public String buildDockerFile(@PathVariable long idService, String tag, String dockerfile){
         editorService.buildPushList("build", tag, dockerfile, null);
+        editorService.setImage(idService, tag);
         return Utils.redirectTo("/service/" + idService);
     }
 
@@ -166,6 +169,12 @@ public class EditorController {
     @PostMapping(value = "/show-list/{id}")
     public String showList(@PathVariable long id){
         editorService.buildPushList("list", null, null, null);
+        return Utils.redirectTo("/service/" + id);
+    }
+
+    @PostMapping(value = "/set-image/{id}")
+    public String setImage(@PathVariable long id, String name){
+        editorService.setImage(id, name);
         return Utils.redirectTo("/service/" + id);
     }
 

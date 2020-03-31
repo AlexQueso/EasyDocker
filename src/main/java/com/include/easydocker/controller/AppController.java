@@ -108,7 +108,7 @@ public class AppController {
         showLoggedInfoOrTemporal(model);
 
         Template t = appService.templateOverview(idTemplate);
-        String dockerCompose = appService.compose(t);
+        String dockerCompose = appService.compose(idTemplate);
 
         model.addAttribute("idTemplate", t.getId());
         model.addAttribute("template", true);
