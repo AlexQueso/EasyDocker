@@ -74,7 +74,7 @@ través de la interfaz.
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_rabbit.png "Diagrama del paquete rabbit")
 
 ## Esquema Rabbit
-![alt text](/src/main/resources/static/PNG/RabbitFlow.png "Esquema de flujo de Rabbit")
+![alt text](/src/main/resources/static/PNG/FabbitFlow.png "Esquema de flujo de Rabbit")
 
 ## Projectos anexos
 - [EasyDockerVagrant](https://github.com/JoseZamora97/EasyDockerVagrant): Este contiene los pasos necesarios para el despliegue en máquinas virtuales a través de Vagrant.
