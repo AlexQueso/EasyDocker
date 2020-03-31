@@ -35,13 +35,19 @@ public class Service {
 
     public String toCompose(){
         StringBuilder sb = new StringBuilder();
-        sb.append(Utils.toCompose(this.getName(), this.getProperties()));
+        sb.append("  ").append(this.getName()).append(":\n");
         sb.append("    image: ").append(this.getImage()).append("\n");
-        sb.append("    networks:\n");
-
-        for(Network network : networks)
-            sb.append("    - ").append(network.getName());
-
+        if (this.getProperties() != null){
+            String[] lines = properties.split("\\r?\\n");
+            for(String line : lines)
+                sb.append("    ").append(line).append("\n");
+            sb.append("\n");
+        }
+        if (!networks.isEmpty()) {
+            sb.append("    networks:\n");
+            for (Network network : networks)
+                sb.append("    - ").append(network.getName()).append("\n");
+        }
         return sb.toString();
     }
 

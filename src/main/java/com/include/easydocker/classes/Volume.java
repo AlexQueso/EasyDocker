@@ -16,7 +16,7 @@ public class Volume {
     private String name;
     private String properties;
 
-    @ManyToOne
+    @ManyToOne()
     private Template template;
 
     @ManyToMany
