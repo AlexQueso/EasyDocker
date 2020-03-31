@@ -58,6 +58,10 @@ En esta página se pueden añadir services a un volume y modificar sus propertie
 Se va a encargar de generar y construir los dockerfile y docker-compose mediante las especificaciones del usuario a 
 través de la interfaz.
 
+## Projectos anexos
+- [EasyDockerVagrant](https://github.com/JoseZamora97/EasyDockerVagrant): Este contiene los pasos necesarios para el despliegue en máquinas virtuales a travs de Vagrant.
+- [DockerController](https://github.com/DavidCorreas/DockerController): Contiene el servicio interno y el despliegue de microservicios con docker-compose.
+
 ## Integrantes del equipo
 Alejandro Quesada Mendo - a.quesada.2016@alumnos.urjc.es - AlexQueso   
 David Correas Oliver - d.correas.2016@alumnos.urjc.es - DavidCorreas  
