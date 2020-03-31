@@ -69,7 +69,7 @@ través de la interfaz.
 #### Diagrama de interacción del paquete classes:
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_classes.png "Diagrama del paquete classes")
 
-#### Diagrama de interacción del paquete classes:
+#### Diagrama de interacción del paquete rabbit:
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_rabbit.png "Diagrama del paquete rabbit")
 
 ## Projectos anexos
