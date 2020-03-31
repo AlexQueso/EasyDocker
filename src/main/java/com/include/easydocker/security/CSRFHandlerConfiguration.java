@@ -12,20 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 public class CSRFHandlerConfiguration extends WebMvcConfigurerAdapter {
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new CSRFHandlerInterceptor());
-    }
-
-    static class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
-
-        @Override
-        public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView){
-            if (modelAndView != null) {
-                CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-                modelAndView.addObject("token", token.getToken());
-            }
-        }
     }
 }

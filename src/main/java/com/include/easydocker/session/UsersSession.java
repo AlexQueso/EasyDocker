@@ -13,8 +13,6 @@ import java.util.ArrayList;
 @SessionScope
 public class UsersSession {
 
-    private WebSocketSession webSocketSession;
-
     private boolean logged = false;
 
     private User user;
@@ -138,20 +136,6 @@ public class UsersSession {
     public void deleteNetwork(long id){
         this.getTemporalUserInformation().getNetwork().remove(id);
     }
-
-    public WebSocketSession getWebSocketSession() {
-        return webSocketSession;
-    }
-
-    public void setWebSocketSession(WebSocketSession session) {
-        this.webSocketSession = session;
-    }
-
-    public void sendLog(String log) throws IOException {
-            webSocketSession.sendMessage(new TextMessage(log));
-            System.out.println("Sent message '" + log + "' to client " + webSocketSession.getId());
-    }
-
 }
 
 

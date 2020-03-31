@@ -12,7 +12,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     public static WebSocketSession webSocketSession;
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) {
         webSocketSession = session;
     }
 

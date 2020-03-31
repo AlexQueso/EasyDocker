@@ -4,14 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
-/**
- * @author Zoltan Altfatter
- */
 public class DockerRequest {
 
     private String function;
     private Map<String, String> body;
-    private Runnable runnable;
 
     public DockerRequest(@JsonProperty("function") String function,
                          @JsonProperty("body") Map<String, String> body) {
