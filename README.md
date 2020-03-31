@@ -58,6 +58,9 @@ Se va a encargar de generar y construir los dockerfile y docker-compose mediante
 través de la interfaz.
 
 ## Diagramas
+#### Diagrama de Microservicios:
+![alt text](/src/main/resources/static/PNG/diagramaConn.png "Diagrama de microservicios")
+
 #### Diagrama de paquetes:
 ![alt text](/src/main/resources/static/PNG/diagramaPackages.png "Diagrama de paquetes")
 
