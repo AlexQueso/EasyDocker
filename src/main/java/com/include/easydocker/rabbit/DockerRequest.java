@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
-/**
- * @author Zoltan Altfatter
- */
 public class DockerRequest {
 
     private String function;
