@@ -64,7 +64,7 @@ través de la interfaz.
 ![alt text](/src/main/resources/static/PNG/diagramaPackages.png "Diagrama de paquetes")
 
 #### Diagrama general de clases:
-![alt text](/src/main/resources/static/PNG/diagramaFull.png "Diagrama general de clases")
+![alt text](/src/main/resources/static/PNG/diagrama_full.png "Diagrama general de clases")
 
 #### Diagrama de interacción del paquete classes:
 ![alt text](/src/main/resources/static/PNG/diagramaPackage_classes.png "Diagrama del paquete classes")
