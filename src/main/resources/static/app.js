@@ -4,7 +4,7 @@ function run(){
     socket.onmessage = event => {
         $('#logs').append(event.data).append("\n");
 
-        if(textarea.selectionStart == textarea.selectionEnd) {
+        if(textarea.selectionStart === textarea.selectionEnd) {
              textarea.scrollTop = textarea.scrollHeight;
         }
     };

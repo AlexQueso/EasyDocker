@@ -1,8 +1,13 @@
 package com.include.easydocker.services;
 
-import com.include.easydocker.classes.*;
+import com.include.easydocker.classes.Network;
+import com.include.easydocker.classes.Project;
+import com.include.easydocker.classes.Service;
+import com.include.easydocker.classes.Template;
+import com.include.easydocker.classes.Volume;
 import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.session.UsersSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
