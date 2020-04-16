@@ -5,9 +5,11 @@ import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,20 +19,23 @@ import java.util.Map;
 @EnableRabbit
 public class ProducerConfig {
 
+    @Autowired
+    private Environment env;
+
     static final String DOCKER_SERVICE_EXCHANGE_NAME = "app.docker.service";
     static final String DOCKER_SERVICE_REQUEST_QUEUE_NAME = "app.docker.request";
-    static final String DOCKER_SERVICE_REPLY_QUEUE_NAME = "app.docker.reply";
     static final String DOCKER_SERVICE_ROUTING_KEY_NAME = "docker";
 
     @Bean
     public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(
             SimpleRabbitListenerContainerFactoryConfigurer configurer,
             ConnectionFactory connectionFactory) {
+
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
         factory.setConcurrentConsumers(1);
         factory.setConnectionFactory(connectionFactory);
-        factory.setConcurrentConsumers(1);
+
         return factory;
     }
 
@@ -46,7 +51,7 @@ public class ProducerConfig {
 
     @Bean
     Queue replyQueue() {
-        return QueueBuilder.nonDurable(DOCKER_SERVICE_REPLY_QUEUE_NAME).build();
+        return QueueBuilder.nonDurable(env.getProperty("rabbit.reply.queue")).build();
     }
 
     @Bean
