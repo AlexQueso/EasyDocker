@@ -3,11 +3,13 @@ package com.include.easydocker.classes;
 import com.include.easydocker.utils.Utils;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Service {
+public class Service implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

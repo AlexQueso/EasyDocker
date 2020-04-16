@@ -1,11 +1,13 @@
 package com.include.easydocker.classes;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class User {
+public class User implements Serializable {
 
     public static final String UNKNOWN = "curgfchgfr5icgrfxbrfjcgr5kjgxtirgcltgch5lticht5ilhc";
 

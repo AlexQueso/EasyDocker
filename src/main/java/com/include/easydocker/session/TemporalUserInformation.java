@@ -2,10 +2,11 @@ package com.include.easydocker.session;
 
 import com.include.easydocker.classes.*;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TemporalUserInformation {
+public class TemporalUserInformation implements Serializable {
 
     private Map<Long, Project> projects = new HashMap<>();
     private Map<Long, Template> templates = new HashMap<>();

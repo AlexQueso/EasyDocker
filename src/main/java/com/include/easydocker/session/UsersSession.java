@@ -7,11 +7,12 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Component
 @SessionScope
-public class UsersSession {
+public class UsersSession implements Serializable {
 
     private boolean logged = false;
 
