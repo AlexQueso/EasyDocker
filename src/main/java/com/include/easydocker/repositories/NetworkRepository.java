@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@CacheConfig(cacheNames = "cache")
+
 public interface NetworkRepository extends JpaRepository<Network, Long> {
-    @Cacheable
+
     Network findById(long id);
-    @Cacheable
+
     Network findByName(String name);
-    @Cacheable
+
     List<Network> findByTemplate(Template template);
 }

@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@CacheConfig(cacheNames = "cache")
+
 public interface VolumesRepository extends JpaRepository<Volume, Long> {
-    @Cacheable
+
     Volume findById(long id);
-    @Cacheable
+
     Volume findByName(String name);
-    @Cacheable
+
     List<Volume> findByTemplate(Template template);
 }

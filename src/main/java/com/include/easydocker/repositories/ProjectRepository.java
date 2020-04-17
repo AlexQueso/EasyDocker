@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@CacheConfig(cacheNames = "cache")
+
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    @Cacheable
+
     Project findById(long id);
-    @Cacheable
+
     List<Project> findByUser(User user);
-    @Cacheable
+
     List<Project> findAll();
 }

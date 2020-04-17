@@ -13,9 +13,9 @@ import java.util.List;
 @CacheConfig(cacheNames = "cache")
 public interface TemplateRepository extends JpaRepository<Template, Long> {
 
-    @Cacheable
+
     Template findById(long id);
-    @Cacheable
+
     List<Template> findByProject(Project project);
 
 }

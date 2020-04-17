@@ -10,9 +10,9 @@ import java.util.List;
 
 @CacheConfig(cacheNames = "cache")
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Cacheable
+
     List<User> findAll();
-    @Cacheable
+
     User findByNameAndPassword(String name, String password);
 
 }

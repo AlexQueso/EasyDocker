@@ -11,10 +11,10 @@ import java.util.List;
 
 @CacheConfig(cacheNames = "cache")
 public interface ServiceRepository extends JpaRepository<Service, Long> {
-    @Cacheable
+
     Service findById(long id);
-    @Cacheable
+
     Service findByName(String name);
-    @Cacheable
+
     List<Service> findByTemplate(Template template);
 }
