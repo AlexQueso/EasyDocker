@@ -3,6 +3,7 @@ package com.include.easydocker.cache;
 
 import com.include.easydocker.EasyDockerApplication;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -17,6 +18,7 @@ public class CacheController {
 
     private final CacheManager cacheManager;
 
+    @Autowired
     public CacheController(CacheManager cacheManager) {
         this.cacheManager = cacheManager;
     }

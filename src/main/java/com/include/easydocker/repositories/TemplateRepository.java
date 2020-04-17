@@ -15,7 +15,10 @@ public interface TemplateRepository extends JpaRepository<Template, Long> {
 
     @Cacheable
     Template findById(long id);
+
     @Cacheable
     List<Template> findByProject(Project project);
 
+    @CacheEvict(allEntries = true)
+    Template save(Template template);
 }
