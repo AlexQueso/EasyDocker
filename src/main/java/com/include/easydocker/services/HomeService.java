@@ -5,6 +5,7 @@ import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.session.UsersSession;
 import com.include.easydocker.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

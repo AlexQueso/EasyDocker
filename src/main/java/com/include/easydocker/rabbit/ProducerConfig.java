@@ -2,11 +2,8 @@ package com.include.easydocker.rabbit;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -25,19 +22,6 @@ public class ProducerConfig {
     static final String DOCKER_SERVICE_EXCHANGE_NAME = "app.docker.service";
     static final String DOCKER_SERVICE_REQUEST_QUEUE_NAME = "app.docker.request";
     static final String DOCKER_SERVICE_ROUTING_KEY_NAME = "docker";
-
-    @Bean
-    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(
-            SimpleRabbitListenerContainerFactoryConfigurer configurer,
-            ConnectionFactory connectionFactory) {
-
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        configurer.configure(factory, connectionFactory);
-        factory.setConcurrentConsumers(1);
-        factory.setConnectionFactory(connectionFactory);
-
-        return factory;
-    }
 
     @Bean
     DirectExchange exchange() {
@@ -68,10 +52,4 @@ public class ProducerConfig {
     public Map<String, MessageHandler> responseHandler() {
         return new HashMap<>();
     }
-
-    @Bean
-    public Consumer listener() {
-        return new Consumer();
-    }
-
 }
