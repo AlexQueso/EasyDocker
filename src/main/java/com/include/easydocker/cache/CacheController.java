@@ -27,8 +27,7 @@ public class CacheController {
     public Map<Object, Object> getCacheContent() {
         ConcurrentMapCacheManager cm = (ConcurrentMapCacheManager) cacheManager;
         ConcurrentMapCache cache = (ConcurrentMapCache) cm.getCache(EasyDockerApplication.cacheName);
-        Map<Object, Object> map= cache.getNativeCache();
-        return cache.getNativeCache();
+        return Objects.requireNonNull(cache).getNativeCache();
     }
 
 }
