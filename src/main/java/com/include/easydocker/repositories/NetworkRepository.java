@@ -9,12 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-
 public interface NetworkRepository extends JpaRepository<Network, Long> {
 
     Network findById(long id);
-
     Network findByName(String name);
-
     List<Network> findByTemplate(Template template);
 }

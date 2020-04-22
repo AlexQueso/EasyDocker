@@ -9,7 +9,9 @@ import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.session.UsersSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
@@ -29,6 +31,7 @@ public class AppService {
         this.editorService = editorService;
     }
 
+    @CacheEvict(value="cache", allEntries = true)
     public void createProject(Project project){
         project.setUser(usersSession.getUser());
         project.setId(System.currentTimeMillis());
@@ -80,6 +83,7 @@ public class AppService {
         return usersSession;
     }
 
+    @CacheEvict(value="cache", allEntries = true)
     public void deleteProject(long idProject) {
         if(usersSession.isLogged()) {
             Project p = repositoryManager.getProjectRepository().findById(idProject);

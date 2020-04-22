@@ -5,6 +5,8 @@ import com.include.easydocker.classes.Template;
 import com.include.easydocker.services.AppService;
 import com.include.easydocker.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +49,7 @@ public class AppController {
         return Utils.redirectTo("/project/" + idProject);
     }
 
+    @CacheEvict(value="cache", allEntries = true)
     @GetMapping("/log-out")
     public String logOut(HttpSession session) {
         session.invalidate();

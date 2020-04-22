@@ -5,12 +5,15 @@ import com.include.easydocker.managers.RepositoriesManager;
 import com.include.easydocker.session.UsersSession;
 import com.include.easydocker.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
 @Component
+@CacheConfig(cacheNames = "cache")
 public class HomeService {
 
     private final RepositoriesManager repositoryManager;
@@ -111,7 +114,7 @@ public class HomeService {
         repositoryManager.getVolumesRepository().save(volume3);
     }
     //*/
-    
+
     public boolean signedInSuccessfully(String user, String password) {
         User welcomeUser = checkUser(user, Utils.hash(password));
 

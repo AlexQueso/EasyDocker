@@ -9,7 +9,9 @@ import com.include.easydocker.rabbit.MessageHandlerImplementations;
 import com.include.easydocker.rabbit.Producer;
 import com.include.easydocker.session.UsersSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 @Component
+@CacheConfig(cacheNames = "cache")
 public class EditorService {
 
     private final RepositoriesManager repositoryManager;

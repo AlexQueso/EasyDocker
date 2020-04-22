@@ -1,6 +1,9 @@
 package com.include.easydocker.classes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.include.easydocker.utils.Utils;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 
@@ -18,9 +21,12 @@ public class Network implements Serializable {
     private String name;
     private String properties;
 
+    @JsonBackReference
     @ManyToOne
     private Template template;
 
+    @JsonBackReference
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     private List<Service> services;
 

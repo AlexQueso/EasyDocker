@@ -1,5 +1,9 @@
 package com.include.easydocker.classes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -15,9 +19,13 @@ public class Project implements Serializable {
 
     private String name;
 
+    @JsonBackReference
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToOne
     private User user;
 
+    @JsonBackReference
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "project")
     private List<Template> templates;
 

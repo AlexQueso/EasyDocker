@@ -1,5 +1,7 @@
 package com.include.easydocker.classes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -18,6 +20,7 @@ public class User implements Serializable {
     private String name;
     private String password;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Project> projects;
 
