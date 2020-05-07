@@ -1,6 +1,6 @@
 # EasyDocker 
 
-[Easydocker](https://www.youtube.com/embed/bzy37xZTD4k)
+[![Easydocker](https://img.youtube.com/vi/bzy37xZTD4k/0.jpg)](https://www.youtube.com/watch?v=bzy37xZTD4k)
 
 
 ### Temática de la web
