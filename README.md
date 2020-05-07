@@ -1,4 +1,8 @@
-# EasyDocker [Video](https://www.youtube.com/watch?v=bzy37xZTD4k&feature=youtu.be)
+# EasyDocker 
+
+[Easydocker](https://www.youtube.com/embed/bzy37xZTD4k)
+
+
 ### Temática de la web
 Se trata de una apliación que ofrece una capa de abstracción en la creación de arquitecturas de microservicios con 
 docker. Los **usuarios registrados** podrán crear y guardar arquitecturas.
